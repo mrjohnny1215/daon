@@ -14,7 +14,7 @@ import {
 import { useEffect, useRef, useState } from 'react'
 import { companyInfo, process as workProcess, reviews, services, strengths } from './data/siteData'
 
-const PHONE_LINK = 'tel:010-4154-0084'
+const PHONE_LINK = 'tel:010-9879-2508'
 
 const serviceImages = [
   '/img/process_completion.png',

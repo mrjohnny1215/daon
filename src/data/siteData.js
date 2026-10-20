@@ -19,8 +19,8 @@ import {
 
 export const companyInfo = {
   name: '다온설비',
-  phone: '010-4154-0084',
-  telLink: 'tel:010-4154-0084',
+  phone: '010-9879-2508',
+  telLink: 'tel:010-9879-2508',
 }
 
 export const badges = [
