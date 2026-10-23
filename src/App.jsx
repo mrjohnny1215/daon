@@ -144,14 +144,12 @@ function Header() {
 
 function DispatchBoard() {
   return (
-    <section className="dispatch-board" aria-label="실시간 배차 안내">
-      <div className="dispatch-status"><span className="dispatch-live-dot" aria-hidden="true" />실시간 배차 시스템 가동 중<span className="dispatch-live-label">LIVE</span></div>
-      <div className="dispatch-main">
-        <span className="dispatch-clock" aria-hidden="true"><PhoneCall size={26} strokeWidth={2.4} /></span>
-        <div><p className="dispatch-caption">평균 현장 도착 시간</p><p className="dispatch-time"><strong>28<span>분</span></strong><span className="dispatch-range">~</span><strong>33<span>분</span></strong></p></div>
-      </div>
-      <div className="dispatch-bottom"><span><Check size={14} strokeWidth={3} /> 빠른 출동 · 꼼꼼한 점검</span><small>지역·교통 상황에 따라 달라질 수 있습니다.</small></div>
-    </section>
+    <aside className="dispatch-float" aria-label="평균 현장 도착 시간 안내">
+      <span className="dispatch-float-dot" aria-hidden="true" />
+      <span className="dispatch-float-label">평균 도착</span>
+      <span className="dispatch-float-time"><span>28</span><small>~</small><span>33</span><small>분</small></span>
+      <span className="dispatch-float-live">LIVE</span>
+    </aside>
   )
 }
 
@@ -159,7 +157,6 @@ function Hero() {
   return (
     <section id="home" className="overflow-hidden bg-[#07182a] px-0 pb-3 pt-2 sm:px-6 sm:pb-8 sm:pt-6">
       <div className="mx-auto w-full max-w-5xl overflow-hidden bg-[#07182a] shadow-xl sm:max-w-5xl sm:rounded-2xl sm:border sm:border-white/10">
-        <DispatchBoard />
         <div className="overflow-hidden bg-[#07182a]">
           <div className="hero-banner relative">
             <h1 className="sr-only">다온설비 | 서울·수도권 24시간 배관케어</h1>
@@ -397,6 +394,7 @@ export default function App() {
         <Reviews />
         <ContactFooter />
       </main>
+      <DispatchBoard />
       <MobileActionBar />
     </div>
   )
