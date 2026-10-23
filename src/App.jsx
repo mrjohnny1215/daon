@@ -144,18 +144,13 @@ function Header() {
 
 function DispatchBoard() {
   return (
-    <section className="dispatch-board mx-auto mb-2 w-[calc(100%-1rem)] max-w-md rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-center text-slate-800 shadow-sm sm:mb-3 sm:px-5 sm:py-3" aria-label="실시간 배차 안내">
-      <div className="mb-1 flex items-center justify-center gap-1.5">
-        <span className="relative flex size-3 shrink-0">
-          <span className="absolute inline-flex size-full animate-ping rounded-full bg-red-400 opacity-50" />
-          <span className="relative inline-flex size-3 rounded-full bg-red-500" />
-        </span>
-        <span className="text-[11px] font-bold tracking-wide text-slate-600 sm:text-xs">실시간 배차 시스템 가동 중</span>
+    <section className="dispatch-board" aria-label="실시간 배차 안내">
+      <div className="dispatch-status"><span className="dispatch-live-dot" aria-hidden="true" />실시간 배차 시스템 가동 중<span className="dispatch-live-label">LIVE</span></div>
+      <div className="dispatch-main">
+        <span className="dispatch-clock" aria-hidden="true"><PhoneCall size={26} strokeWidth={2.4} /></span>
+        <div><p className="dispatch-caption">평균 현장 도착 시간</p><p className="dispatch-time"><strong>28<span>분</span></strong><span className="dispatch-range">~</span><strong>33<span>분</span></strong></p></div>
       </div>
-      <p className="text-[10px] font-bold tracking-wide text-slate-500 sm:text-xs">평균 현장 도착 시간</p>
-      <div className="mt-0.5 text-[clamp(1.5rem,7vw,1.85rem)] font-black leading-tight tracking-tight text-red-600 sm:text-3xl">
-        28분 <span className="px-0.5 text-slate-400 sm:px-1">~</span> 33분
-      </div>
+      <div className="dispatch-bottom"><span><Check size={14} strokeWidth={3} /> 빠른 출동 · 꼼꼼한 점검</span><small>지역·교통 상황에 따라 달라질 수 있습니다.</small></div>
     </section>
   )
 }

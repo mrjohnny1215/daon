@@ -41,3 +41,21 @@ main h2, main h3, main p { word-break: keep-all; overflow-wrap: anywhere; }
   #home > div { border-radius: 0; box-shadow: none; }
   .dispatch-board { margin-bottom: 12px; }
 }
+
+/* High-contrast dispatch notice above the hero. */
+.dispatch-board{width:calc(100% - 24px);max-width:572px;margin:0 auto 16px;overflow:hidden;border:1px solid #385575;border-radius:18px;background:linear-gradient(125deg,#122d4c,#0b1c32 75%);color:#fff;box-shadow:0 8px 24px #0003;text-align:center}
+.dispatch-status{display:flex;align-items:center;justify-content:center;gap:8px;padding:12px 14px;border-bottom:1px solid #ffffff14;font-size:12px;font-weight:800;letter-spacing:.015em;color:#e2eaf5}
+.dispatch-live-dot{width:8px;height:8px;flex-shrink:0;border-radius:50%;background:#ff5858;box-shadow:0 0 0 4px #ff585820;animation:dispatchPulse 2s ease-in-out infinite}
+.dispatch-live-label{margin-left:2px;border:1px solid #ff747466;border-radius:4px;padding:1px 5px;font-size:9px;letter-spacing:.08em;color:#ff9d94}
+.dispatch-main{display:flex;align-items:center;justify-content:center;gap:18px;padding:18px 16px 16px}
+.dispatch-clock{display:grid;place-items:center;width:52px;height:52px;border:1px solid #fbbf2440;border-radius:16px;background:#fbbf2410;color:#fbbf24}
+.dispatch-caption{margin:0 0 4px;font-size:11px;font-weight:700;letter-spacing:.05em;color:#a9bdd5}
+.dispatch-time{display:flex;align-items:baseline;justify-content:center;gap:12px;margin:0;line-height:1;font-variant-numeric:tabular-nums}
+.dispatch-time strong{font-size:46px;font-weight:900;letter-spacing:-.05em;color:#ffd166;text-shadow:0 2px 12px #ffb80015}
+.dispatch-time strong span{margin-left:3px;font-size:21px;letter-spacing:0;color:#ffe9b7}
+.dispatch-range{font-size:25px;font-weight:600;color:#6d86a4}
+.dispatch-bottom{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:5px 14px;padding:10px 14px;background:#ffffff05;border-top:1px solid #ffffff10}
+.dispatch-bottom>span{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;color:#e8f0fb}
+.dispatch-bottom small{font-size:9px;line-height:1.6;color:#91a8c3}
+@keyframes dispatchPulse{50%{box-shadow:0 0 0 6px #ff585808;opacity:.65}}
+@media(max-width:359px){.dispatch-main{gap:12px}.dispatch-time strong{font-size:40px}.dispatch-status{font-size:11px}}
