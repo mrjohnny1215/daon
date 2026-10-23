@@ -96,7 +96,7 @@ function PhoneLink({ children, className = '', ...props }) {
 
 function SectionHeading({ eyebrow, title, description }) {
   return (
-    <div className="mx-auto mb-6 max-w-2xl text-center sm:mb-9">
+    <div className="mx-auto mb-7 max-w-2xl text-center sm:mb-9">
       <p className="mb-2 inline-flex min-h-9 items-center rounded-full bg-blue-50 px-3 text-sm font-black text-blue-800 sm:min-h-10 sm:px-4 sm:text-base">{eyebrow}</p>
       <h2 className="break-keep text-[clamp(1.55rem,6vw,2.5rem)] font-black leading-[1.25] tracking-[-.04em] text-slate-900">{title}</h2>
       {description && <p className="mx-auto mt-2 max-w-xl break-keep text-sm leading-6 text-slate-600 sm:mt-3 sm:text-base sm:leading-7">{description}</p>}
@@ -109,7 +109,7 @@ function Header() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200/80 bg-white/95 backdrop-blur-md">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:h-[72px] sm:px-7">
+      <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-4 sm:h-[72px] sm:px-7">
         <a href="#home" className="inline-flex min-h-12 items-center gap-2.5" aria-label="다온설비 홈">
           <span className="grid size-9 place-items-center rounded-xl bg-blue-700 text-white sm:size-10"><Droplets size={21} /></span>
           <span className="text-lg font-black tracking-tight text-slate-900">{companyInfo.name}</span>
@@ -163,7 +163,7 @@ function DispatchBoard() {
 function Hero() {
   return (
     <section id="home" className="overflow-hidden bg-[#07182a] px-0 pb-3 pt-2 sm:px-6 sm:pb-8 sm:pt-6">
-      <div className="mx-auto max-w-md overflow-hidden bg-[#07182a] shadow-xl sm:max-w-5xl sm:rounded-2xl sm:border sm:border-white/10">
+      <div className="mx-auto w-full max-w-5xl overflow-hidden bg-[#07182a] shadow-xl sm:max-w-5xl sm:rounded-2xl sm:border sm:border-white/10">
         <DispatchBoard />
         <div className="overflow-hidden bg-[#07182a]">
           <div className="hero-banner relative">
@@ -180,8 +180,8 @@ function Hero() {
 
 function ServiceGrid() {
   return (
-    <section id="services" className="scroll-mt-20 bg-sky-50 px-4 py-9 sm:px-7 sm:py-16">
-      <div className="mx-auto max-w-4xl">
+    <section id="services" className="scroll-mt-24 bg-sky-50 px-4 py-10 sm:px-7 sm:py-16">
+      <div className="mx-auto max-w-5xl">
         <SectionHeading eyebrow="다온설비 주요 서비스" title="막힘부터 누수까지" description="현장을 확인하고 필요한 작업과 비용을 먼저 안내합니다." />
         <div className="grid gap-2.5 sm:grid-cols-2 sm:gap-4">
           {services.map((service, index) => (
@@ -203,7 +203,7 @@ function ServiceGrid() {
 
 function BeforeAfter() {
   return (
-    <section id="work" className="scroll-mt-20 bg-white px-4 py-9 sm:px-7 sm:py-16">
+    <section id="work" className="scroll-mt-20 bg-white px-4 py-10 sm:px-7 sm:py-16">
       <div className="mx-auto max-w-5xl">
         <SectionHeading eyebrow="다온설비 작업 사례" title="작업 전·후 비교" description="막힘 원인을 점검하고 작업 후 배수 상태까지 확인합니다." />
         <div className="mx-auto mt-5 grid max-w-lg gap-4 sm:mt-6 sm:gap-5">
@@ -234,7 +234,7 @@ function BeforeAfter() {
 function PromiseSection() {
   return (
     <section id="promise" className="scroll-mt-20 overflow-hidden bg-slate-900 px-4 py-10 text-white sm:px-7 sm:py-16">
-      <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[.85fr_1.15fr] lg:items-center lg:gap-16">
+      <div className="mx-auto grid max-w-5xl gap-8 lg:grid-cols-[.85fr_1.15fr] lg:items-center lg:gap-16">
         <div>
           <p className="mb-2 text-sm font-black text-cyan-300 sm:text-base">정직한 시공 약속</p>
           <h2 className="break-keep text-3xl font-black leading-tight tracking-tight sm:text-5xl">상담부터 마무리까지,<br />투명하게</h2>
@@ -310,8 +310,8 @@ function StrengthSection() {
   }, [])
 
   return (
-    <section className="bg-white px-4 py-9 sm:px-7 sm:py-16">
-      <div className="mx-auto max-w-7xl">
+    <section className="bg-white px-4 py-10 sm:px-7 sm:py-16">
+      <div className="mx-auto max-w-5xl">
         <SectionHeading eyebrow="다온설비가 다른 이유" title="다온설비를 선택하는 이유" description="꼼꼼한 점검과 정직한 설명으로 믿을 수 있는 서비스를 제공합니다." />
         <div ref={gridRef} className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4">
           {strengths.map(({ title, desc, icon: Icon }, index) => (
@@ -329,8 +329,8 @@ function StrengthSection() {
 
 function Reviews() {
   return (
-    <section id="reviews" className="scroll-mt-20 bg-slate-50 px-4 py-9 sm:px-7 sm:py-16">
-      <div className="mx-auto max-w-7xl">
+    <section id="reviews" className="scroll-mt-20 bg-slate-50 px-4 py-10 sm:px-7 sm:py-16">
+      <div className="mx-auto max-w-5xl">
         <SectionHeading eyebrow="고객님들의 이용 후기" title="고객님이 남겨주신 후기" description="상담과 작업 과정에서 느끼신 점을 확인해보세요." />
         <div className="grid gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
           {reviews.slice(0, 5).map((review) => (
@@ -358,13 +358,13 @@ function ContactFooter() {
   return (
     <>
       <section id="contact" className="bg-blue-700 px-4 py-10 text-white sm:px-7 sm:py-14">
-        <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-4 sm:flex-row sm:items-center sm:gap-5">
+        <div className="mx-auto flex max-w-5xl flex-col items-start justify-between gap-4 sm:flex-row sm:items-center sm:gap-5">
           <div><p className="text-sm font-black text-blue-100 sm:text-base">다온설비 배관·설비 상담</p><h2 className="mt-2 break-keep text-2xl font-black tracking-tight sm:text-3xl">불편한 순간, 다온설비에 전화하세요.</h2><p className="mt-2 text-sm leading-6 text-blue-100">증상을 듣고 가능한 방문 일정을 안내해드립니다.</p></div>
           <PhoneLink className="flex min-h-14 w-full items-center justify-center gap-3 rounded-xl bg-white px-6 font-black text-blue-800 shadow-lg sm:w-auto"><PhoneCall size={20} /> {companyInfo.phone} <ArrowRight size={18} /></PhoneLink>
         </div>
       </section>
       <footer className="bg-slate-950 px-4 py-7 text-slate-300 sm:px-7 sm:py-9">
-        <div className="mx-auto flex max-w-7xl flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mx-auto flex max-w-5xl flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <a href="#home" className="inline-flex min-h-12 items-center gap-2 font-black text-white"><Droplets size={19} className="text-cyan-400" />{companyInfo.name}</a>
           <p className="text-xs">배관·설비 상담 <PhoneLink className="font-bold text-white">{companyInfo.phone}</PhoneLink></p>
           <p className="text-[11px] text-slate-400">© {new Date().getFullYear()} 다온설비</p>
@@ -386,7 +386,7 @@ function MobileActionBar() {
 
 export default function App() {
   return (
-    <div className="min-h-screen overflow-x-hidden bg-white pb-28 font-sans text-slate-900 md:pb-0">
+    <div className="min-h-screen overflow-x-hidden bg-white pb-24 font-sans text-slate-900 md:pb-0">
       <style>{`@keyframes callGlow{0%,100%{box-shadow:0 0 0 0 rgba(37,99,235,.2),0 8px 22px rgba(30,64,175,.16)}50%{box-shadow:0 0 0 7px rgba(37,99,235,0),0 10px 27px rgba(30,64,175,.22)}}@keyframes callSweep{0%,58%{transform:translateX(-180%) skewX(-22deg);opacity:0}66%{opacity:.55}82%,100%{transform:translateX(420%) skewX(-22deg);opacity:0}}@keyframes timerFlash{0%,100%{filter:brightness(1);transform:scale(1)}50%{filter:brightness(1.12);transform:scale(1.025)}}@keyframes strengthStepFocus{0%,100%{transform:translateY(0) scale(1);border-color:#e2e8f0;box-shadow:0 1px 3px rgba(15,23,42,.04)}12%,28%{transform:translateY(-2px) scale(1.025);border-color:#3b82f6;box-shadow:0 0 0 5px rgba(59,130,246,.12),0 12px 26px rgba(37,99,235,.12)}40%{transform:translateY(0) scale(1);border-color:#e2e8f0;box-shadow:0 1px 3px rgba(15,23,42,.04)}}.call-pulse{position:relative;isolation:isolate;overflow:hidden;animation:callGlow 2.4s ease-out infinite}.call-pulse:before{position:absolute;z-index:0;top:-35%;bottom:-35%;left:0;width:32%;transform:translateX(-180%) skewX(-22deg);background:linear-gradient(90deg,transparent,rgba(255,255,255,.34),transparent);content:"";pointer-events:none;animation:callSweep 3.8s ease-in-out infinite}.call-pulse>*{position:relative;z-index:1}.timer-flash{animation:timerFlash 1.8s ease-in-out infinite}.dispatch-board{backdrop-filter:blur(12px)}.strength-step-visible{animation:strengthStepFocus 9s ease-in-out infinite}@media(prefers-reduced-motion:reduce){.call-pulse,.call-pulse:before,.timer-flash,.strength-step-visible}`}</style>
       <Header />
       <main>
@@ -394,7 +394,7 @@ export default function App() {
         <ServiceGrid />
         <BeforeAfter />
         <section aria-label="다온설비 배관 업체 비교 안내" className="w-full overflow-hidden bg-sky-50">
-<div className="px-6 py-14 text-center"><p className="font-bold text-blue-700">우리 동네 배관 해결사, 다온설비</p><h2 className="mt-3 text-2xl font-black sm:text-4xl">꼼꼼하게 비교하고 선택하세요</h2><p className="mt-4 leading-7 text-slate-600">작업 전 원인 설명 · 사전 견적 안내 · 작업 후 배수 확인<br />처음 상담부터 마무리 점검까지 다온설비가 함께합니다.</p></div>
+<div className="mx-auto max-w-5xl px-4 py-10 text-center sm:px-7 sm:py-16"><p className="font-bold text-blue-700">우리 동네 배관 해결사, 다온설비</p><h2 className="mt-3 text-2xl font-black sm:text-4xl">꼼꼼하게 비교하고 선택하세요</h2><p className="mt-4 leading-7 text-slate-600">작업 전 원인 설명 · 사전 견적 안내 · 작업 후 배수 확인<br />처음 상담부터 마무리 점검까지 다온설비가 함께합니다.</p></div>
         </section>
         <PromiseSection />
         <ProcessSection />
