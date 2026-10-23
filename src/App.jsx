@@ -167,7 +167,10 @@ function Hero() {
         <DispatchBoard />
         <div className="overflow-hidden bg-[#07182a]">
           <div className="hero-banner relative">
-<div className="px-6 py-14 text-center text-white sm:py-20"><p className="font-bold text-cyan-300">서울·수도권 24시간 배관케어</p><h1 className="mt-5 text-3xl font-black leading-tight sm:text-5xl">역류하고 막혀서 답답할 땐?<br /><span className="text-cyan-300">다온설비</span>가 시원하게 해결합니다.</h1><p className="mt-5 leading-7 text-slate-200">변기 · 하수구 · 싱크대 막힘부터 누수탐지까지<br />꼼꼼한 점검과 정직한 설명으로 찾아갑니다.</p><PhoneLink className="mt-8 inline-flex min-h-14 items-center gap-3 rounded-xl bg-blue-600 px-6 text-lg font-black"><PhoneCall size={22} /> 무료 전화상담 {companyInfo.phone}</PhoneLink></div>
+            <h1 className="sr-only">다온설비 | 서울·수도권 24시간 배관케어</h1>
+            <PhoneLink className="block" aria-label="다온설비 전화 상담 010-9879-2508">
+              <img src="/img/daon-hero.png" alt="막힌 곳? 다온설비가 시원하게 뚫어드립니다! 변기, 싱크대, 하수구, 누수탐지, 간단수리. 24시 출장대기 010-9879-2508" width="1024" height="572" fetchPriority="high" className="block h-auto w-full" />
+            </PhoneLink>
           </div>
         </div>
       </div>
