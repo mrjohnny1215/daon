@@ -44,14 +44,14 @@ main h2, main h3, main p { word-break: keep-all; overflow-wrap: anywhere; }
 
 
 /* Compact arrival notice floats above the mobile call button. */
-.dispatch-float{position:fixed;z-index:45;right:20px;bottom:24px;display:flex;align-items:center;gap:9px;padding:10px 15px;border:1px solid #47627e;border-radius:999px;background:linear-gradient(120deg,#173452,#0b1c32);color:#fff;box-shadow:0 6px 22px #07182a35;pointer-events:none}
+.dispatch-float{position:fixed;z-index:45;right:20px;bottom:24px;display:flex;align-items:center;gap:9px;padding:10px 15px;border:1px solid #bfdbfe;border-radius:999px;background:linear-gradient(120deg,#fff,#eff6ff);color:#15345b;box-shadow:0 6px 22px #2563eb20;pointer-events:none}
 .dispatch-float-dot{width:7px;height:7px;flex-shrink:0;border-radius:50%;background:#ff6262;box-shadow:0 0 0 3px #ff626225;animation:dispatchPulse 2s ease-in-out infinite}
-.dispatch-float-label{font-size:11px;font-weight:700;color:#cbd9e9;white-space:nowrap}
+.dispatch-float-label{font-size:11px;font-weight:700;color:#475569;white-space:nowrap}
 .dispatch-float-time{display:inline-flex;align-items:baseline;gap:5px;line-height:1;white-space:nowrap;font-variant-numeric:tabular-nums}
-.dispatch-float-time>span{display:inline-block;font-size:24px;font-weight:900;letter-spacing:-.04em;color:#ffd166;animation:arrivalLift 3s ease-in-out infinite}
+.dispatch-float-time>span{display:inline-block;font-size:24px;font-weight:900;letter-spacing:-.04em;color:#1d4ed8;animation:arrivalLift 3s ease-in-out infinite}
 .dispatch-float-time>span:nth-of-type(2){animation-delay:.18s}
-.dispatch-float-time small{font-size:12px;font-weight:700;color:#d5e1ef}
-.dispatch-float-live{border:1px solid #ff79794d;border-radius:4px;padding:2px 4px;font-size:8px;font-weight:800;letter-spacing:.06em;color:#ff9d94}
+.dispatch-float-time small{font-size:12px;font-weight:700;color:#475569}
+.dispatch-float-live{border:1px solid #ff79794d;border-radius:4px;padding:2px 4px;font-size:8px;font-weight:800;letter-spacing:.06em;color:#dc2626}
 @keyframes arrivalLift{0%,65%,100%{transform:translateY(0)}78%{transform:translateY(-3px)}88%{transform:translateY(1px)}}
 @keyframes dispatchPulse{50%{opacity:.5;box-shadow:0 0 0 5px #ff626210}}
 @media(max-width:767px){.dispatch-float{right:12px;bottom:calc(84px + env(safe-area-inset-bottom));gap:7px;padding:9px 12px}.dispatch-float-time>span{font-size:22px}}

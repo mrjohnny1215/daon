@@ -225,23 +225,23 @@ function BeforeAfter() {
 
 function PromiseSection() {
   return (
-    <section id="promise" className="scroll-mt-20 overflow-hidden bg-slate-900 px-4 py-10 text-white sm:px-7 sm:py-16">
+    <section id="promise" className="scroll-mt-20 overflow-hidden bg-sky-50 px-4 py-10 text-slate-900 sm:px-7 sm:py-16">
       <div className="mx-auto grid max-w-5xl gap-8 lg:grid-cols-[.85fr_1.15fr] lg:items-center lg:gap-16">
         <div>
-          <p className="mb-2 text-sm font-black text-cyan-300 sm:text-base">정직한 시공 약속</p>
+          <p className="mb-2 text-sm font-black text-blue-700 sm:text-base">정직한 시공 약속</p>
           <h2 className="break-keep text-3xl font-black leading-tight tracking-tight sm:text-5xl">상담부터 마무리까지,<br />투명하게</h2>
-          <p className="mt-4 max-w-lg break-keep text-sm leading-7 text-slate-300 sm:mt-5 sm:text-base">작업 전 충분히 설명하고, 동의하신 범위 안에서만 작업합니다. 해결되지 않은 문제에는 비용을 청구하지 않습니다.</p>
-          <PhoneLink className="mt-6 inline-flex min-h-12 items-center gap-2 rounded-xl bg-white px-5 text-sm font-black text-slate-900 transition hover:bg-cyan-50">
+          <p className="mt-4 max-w-lg break-keep text-sm leading-7 text-slate-600 sm:mt-5 sm:text-base">작업 전 충분히 설명하고, 동의하신 범위 안에서만 작업합니다. 해결되지 않은 문제에는 비용을 청구하지 않습니다.</p>
+          <PhoneLink className="mt-6 inline-flex min-h-12 items-center gap-2 rounded-xl bg-blue-600 px-5 text-sm font-black text-white shadow-sm transition hover:bg-blue-700">
             <Phone size={17} /> 전화로 먼저 상담하기 <ArrowRight size={16} />
           </PhoneLink>
         </div>
-        <div className="divide-y divide-white/15 border-y border-white/15">
+        <div className="divide-y divide-sky-200 border-y border-sky-200">
           {promises.map(({ title, description, icon: Icon }, index) => (
             <article key={title} className="grid grid-cols-[30px_44px_1fr_18px] items-center gap-3 py-4 sm:grid-cols-[40px_50px_1fr_20px] sm:gap-4 sm:py-5">
-              <span className="text-xs font-black tracking-widest text-cyan-300">0{index + 1}</span>
-              <span className="grid size-11 place-items-center rounded-xl bg-white/10 text-cyan-200 sm:size-12"><Icon size={21} /></span>
-              <div><h3 className="break-keep text-sm font-black sm:text-base">{title}</h3><p className="mt-1 break-keep text-xs leading-5 text-slate-300 sm:text-sm sm:leading-6">{description}</p></div>
-              <Check size={18} className="text-cyan-300" />
+              <span className="text-xs font-black tracking-widest text-blue-700">0{index + 1}</span>
+              <span className="grid size-11 place-items-center rounded-xl bg-white text-blue-600 ring-1 ring-sky-100 sm:size-12"><Icon size={21} /></span>
+              <div><h3 className="break-keep text-sm font-black sm:text-base">{title}</h3><p className="mt-1 break-keep text-xs leading-5 text-slate-600 sm:text-sm sm:leading-6">{description}</p></div>
+              <Check size={18} className="text-blue-700" />
             </article>
           ))}
         </div>
@@ -349,17 +349,17 @@ function Reviews() {
 function ContactFooter() {
   return (
     <>
-      <section id="contact" className="bg-blue-700 px-4 py-10 text-white sm:px-7 sm:py-14">
+      <section id="contact" className="bg-sky-50 px-4 py-10 text-slate-900 sm:px-7 sm:py-14">
         <div className="mx-auto flex max-w-5xl flex-col items-start justify-between gap-4 sm:flex-row sm:items-center sm:gap-5">
-          <div><p className="text-sm font-black text-blue-100 sm:text-base">다온설비 배관·설비 상담</p><h2 className="mt-2 break-keep text-2xl font-black tracking-tight sm:text-3xl">불편한 순간, 다온설비에 전화하세요.</h2><p className="mt-2 text-sm leading-6 text-blue-100">증상을 듣고 가능한 방문 일정을 안내해드립니다.</p></div>
-          <PhoneLink className="flex min-h-14 w-full items-center justify-center gap-3 rounded-xl bg-white px-6 font-black text-blue-800 shadow-lg sm:w-auto"><PhoneCall size={20} /> {companyInfo.phone} <ArrowRight size={18} /></PhoneLink>
+          <div><p className="text-sm font-black text-blue-700 sm:text-base">다온설비 배관·설비 상담</p><h2 className="mt-2 break-keep text-2xl font-black tracking-tight sm:text-3xl">불편한 순간, 다온설비에 전화하세요.</h2><p className="mt-2 text-sm leading-6 text-blue-700">증상을 듣고 가능한 방문 일정을 안내해드립니다.</p></div>
+          <PhoneLink className="flex min-h-14 w-full items-center justify-center gap-3 rounded-xl bg-blue-600 px-6 font-black text-white shadow-md transition hover:bg-blue-700 sm:w-auto"><PhoneCall size={20} /> {companyInfo.phone} <ArrowRight size={18} /></PhoneLink>
         </div>
       </section>
-      <footer className="bg-slate-950 px-4 py-7 text-slate-300 sm:px-7 sm:py-9">
+      <footer className="border-t border-sky-100 bg-white px-4 py-7 text-slate-600 sm:px-7 sm:py-9">
         <div className="mx-auto flex max-w-5xl flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <a href="#home" className="inline-flex min-h-12 items-center gap-2 font-black text-white"><Droplets size={19} className="text-cyan-400" />{companyInfo.name}</a>
-          <p className="text-xs">배관·설비 상담 <PhoneLink className="font-bold text-white">{companyInfo.phone}</PhoneLink></p>
-          <p className="text-[11px] text-slate-400">© {new Date().getFullYear()} 다온설비</p>
+          <a href="#home" className="inline-flex min-h-12 items-center gap-2 font-black text-blue-700"><Droplets size={19} className="text-blue-600" />{companyInfo.name}</a>
+          <p className="text-xs">배관·설비 상담 <PhoneLink className="font-bold text-blue-700">{companyInfo.phone}</PhoneLink></p>
+          <p className="text-[11px] text-slate-500">© {new Date().getFullYear()} 다온설비</p>
         </div>
       </footer>
     </>
