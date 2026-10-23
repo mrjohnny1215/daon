@@ -169,7 +169,7 @@ function Hero() {
           <div className="hero-banner relative">
             <h1 className="sr-only">다온설비 | 서울·수도권 24시간 배관케어</h1>
             <PhoneLink className="block" aria-label="다온설비 전화 상담 010-9879-2508">
-              <img src="/img/daon-hero.png" alt="막힌 곳? 다온설비가 시원하게 뚫어드립니다! 변기, 싱크대, 하수구, 누수탐지, 간단수리. 24시 출장대기 010-9879-2508" width="1024" height="572" fetchPriority="high" className="block h-auto w-full" />
+              <img src="/img/daon-hero-portrait.png" alt="막힌 곳? 다온설비가 시원하게 뚫어드립니다! 변기, 싱크대, 하수구, 누수탐지, 간단수리. 24시 출장대기 010-9879-2508" width="572" height="1024" fetchPriority="high" className="block h-auto w-full" />
             </PhoneLink>
           </div>
         </div>

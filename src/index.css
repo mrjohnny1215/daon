@@ -35,7 +35,7 @@
 
 /* Shared spacing and readable Korean wrapping across the landing page. */
 main h2, main h3, main p { word-break: keep-all; overflow-wrap: anywhere; }
-.hero-banner img { aspect-ratio: 1024 / 572; object-fit: contain; }
+.hero-banner img { aspect-ratio: 572 / 1024; object-fit: contain; }
 @media (max-width: 639px) {
   #home { padding: 12px 0 16px; }
   #home > div { border-radius: 0; box-shadow: none; }
