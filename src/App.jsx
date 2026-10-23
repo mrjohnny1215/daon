@@ -155,9 +155,9 @@ function DispatchBoard() {
 
 function Hero() {
   return (
-    <section id="home" className="overflow-hidden bg-[#07182a] px-0 pb-3 pt-2 sm:px-6 sm:pb-8 sm:pt-6">
-      <div className="mx-auto w-full max-w-5xl overflow-hidden bg-[#07182a] shadow-xl sm:max-w-5xl sm:rounded-2xl sm:border sm:border-white/10">
-        <div className="overflow-hidden bg-[#07182a]">
+    <section id="home" className="overflow-hidden bg-white p-0">
+      <div className="mx-auto w-full max-w-5xl overflow-hidden">
+        <div className="overflow-hidden">
           <div className="hero-banner relative">
             <h1 className="sr-only">다온설비 | 서울·수도권 24시간 배관케어</h1>
             <PhoneLink className="block" aria-label="다온설비 전화 상담 010-9879-2508">
