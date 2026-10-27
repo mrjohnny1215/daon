@@ -14,6 +14,8 @@ import {
 import { useEffect, useRef, useState } from 'react'
 import { companyInfo, process as workProcess, reviews, services, strengths } from './data/siteData'
 
+import { trackPhone, trackVisit } from './lib/analytics'
+
 const PHONE_LINK = 'tel:010-9879-2508'
 
 const serviceImages = [
@@ -91,7 +93,7 @@ const navItems = [
 ]
 
 function PhoneLink({ children, className = '', ...props }) {
-  return <a href={PHONE_LINK} className={className} {...props}>{children}</a>
+  return <a href={PHONE_LINK} className={className} {...props} onClick={(event) => { trackPhone(event); props.onClick?.(event) }}>{children}</a>
 }
 
 function SectionHeading({ eyebrow, title, description }) {
