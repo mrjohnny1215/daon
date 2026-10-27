@@ -29,6 +29,7 @@ export function trackVisit() {
 export function trackPhone(event) {
   if (Date.now() - lastClick < 1500) return
   lastClick = Date.now()
+  trackVisit()
   const link = event.currentTarget
   const section = link.closest('section')
   record('phone_click', section?.id || (link.closest('footer') ? 'footer' : link.closest('header') ? 'header' : 'floating-call'))
