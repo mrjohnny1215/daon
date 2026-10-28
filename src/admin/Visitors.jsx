@@ -21,7 +21,7 @@ function makeQuery({ days, country, device, type, visitor, selectedDay }) {
   return q
 }
 export default function Visitors() {
-  const [days, setDays] = useState(7), [country, setCountry] = useState('all'), [device, setDevice] = useState('all'), [type, setType] = useState('all'), [visitor, setVisitor] = useState(''), [page, setPage] = useState(0)
+  const [days, setDays] = useState(1), [country, setCountry] = useState('all'), [device, setDevice] = useState('all'), [type, setType] = useState('all'), [visitor, setVisitor] = useState(''), [page, setPage] = useState(0)
   const [stats, setStats] = useState(null), [rows, setRows] = useState([]), [total, setTotal] = useState(0), [busy, setBusy] = useState(false), [error, setError] = useState(''), [exporting, setExporting] = useState(false)
   const [selectedDay, setSelectedDay] = useState(''), [daily, setDaily] = useState([])
   const serial = useRef(0)

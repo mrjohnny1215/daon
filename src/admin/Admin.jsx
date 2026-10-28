@@ -59,7 +59,7 @@ function CampaignLinks() {
 }
 export default function Admin() {
   const [session, setSession] = useState(null), [ready, setReady] = useState(false), [authorized, setAuthorized] = useState(false)
-  const [tab, setTab] = useState(() => { const view = new URLSearchParams(location.search).get('view'); return ['overview', 'history', 'visitors', 'links'].includes(view) ? view : 'visitors' }), [days, setDays] = useState(7), [source, setSource] = useState('all'), [page, setPage] = useState(0)
+  const [tab, setTab] = useState(() => { const view = new URLSearchParams(location.search).get('view'); return ['overview', 'history', 'visitors', 'links'].includes(view) ? view : 'visitors' }), [days, setDays] = useState(1), [source, setSource] = useState('all'), [page, setPage] = useState(0)
   const [stats, setStats] = useState(null), [rows, setRows] = useState([]), [count, setCount] = useState(0), [busy, setBusy] = useState(false), [error, setError] = useState(''), [updated, setUpdated] = useState(null), [exporting, setExporting] = useState(false)
   useEffect(() => {
     document.title = '다온설비 관리자 | 전화 클릭 분석'
