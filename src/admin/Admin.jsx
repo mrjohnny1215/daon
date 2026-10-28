@@ -59,7 +59,7 @@ function CampaignLinks() {
 }
 export default function Admin() {
   const [session, setSession] = useState(null), [ready, setReady] = useState(false), [authorized, setAuthorized] = useState(false)
-  const [tab, setTab] = useState('overview'), [days, setDays] = useState(7), [source, setSource] = useState('all'), [page, setPage] = useState(0)
+  const [tab, setTab] = useState(() => { const view = new URLSearchParams(location.search).get('view'); return ['overview', 'history', 'visitors', 'links'].includes(view) ? view : 'visitors' }), [days, setDays] = useState(7), [source, setSource] = useState('all'), [page, setPage] = useState(0)
   const [stats, setStats] = useState(null), [rows, setRows] = useState([]), [count, setCount] = useState(0), [busy, setBusy] = useState(false), [error, setError] = useState(''), [updated, setUpdated] = useState(null), [exporting, setExporting] = useState(false)
   useEffect(() => {
     document.title = '다온설비 관리자 | 전화 클릭 분석'
@@ -81,6 +81,10 @@ export default function Admin() {
     })
     return () => { active = false }
   }, [session])
+  function selectTab(value) {
+    setTab(value)
+    const url = new URL(location.href); url.searchParams.set('view', value); history.replaceState(null, '', url)
+  }
   const load = useCallback(async () => {
     if (!authorized) return
     setBusy(true); setError('')
@@ -117,11 +121,11 @@ export default function Admin() {
   const rate = stats?.sessions ? Math.min(100, (stats.callers / stats.sessions) * 100).toFixed(1) : '0.0'
   return <div className="ad-shell">
     <aside className="ad-sidebar"><a className="ad-brand" href="/admin"><span><Droplets size={23} /></span>다온설비</a><p className="ad-sidebar-caption">문의 분석 관리자</p>
-      <nav aria-label="관리자 메뉴">{[['overview', BarChart3, '대시보드'], ['history', PhoneCall, '전화 클릭 내역'], ['visitors', Users, '방문자 분석'], ['links', Link2, '광고 추적 링크']].map(([id, Icon, label]) => <button key={id} className={tab === id ? 'active' : ''} onClick={() => setTab(id)}><Icon size={18} />{label}</button>)}</nav>
+      <nav aria-label="관리자 메뉴">{[['overview', BarChart3, '대시보드'], ['history', PhoneCall, '전화 클릭 내역'], ['visitors', Users, '방문자 분석'], ['links', Link2, '광고 추적 링크']].map(([id, Icon, label]) => <button key={id} className={tab === id ? 'active' : ''} onClick={() => selectTab(id)}><Icon size={18} />{label}</button>)}</nav>
       <div className="ad-sidebar-bottom"><a href="/" target="_blank" rel="noreferrer"><ExternalLink size={16} />사이트 보기</a><button onClick={logout}><LogOut size={16} />로그아웃</button><p>{session.user.email}</p></div>
     </aside>
     <main className="ad-content"><header className="ad-topbar"><span>다온설비 <span>/ 관리자</span></span><span className="ad-secure"><LockKeyhole size={12} />관리자 전용</span></header>
-      <div className="ad-main"><div className="ad-page-title"><div><p className="ad-eyebrow">DAON ANALYTICS</p><h1>{tab === 'overview' ? '문의 흐름을 한눈에' : tab === 'history' ? '전화 클릭 내역' : tab === 'visitors' ? '방문자 분석' : '광고 추적 링크'}</h1><p className="ad-subtitle">{tab === 'links' ? '어떤 광고에서 문의가 들어왔는지 구분하세요.' : '방문부터 전화걸기까지, 사이트의 실제 클릭 기록입니다.'}</p></div>
+      <div className="ad-main"><nav className="ad-view-tabs" aria-label="통계 화면 선택">{[['visitors','접속·국가·기기 통계'],['overview','전화 문의 요약'],['history','전화 클릭 내역'],['links','광고 추적 링크']].map(([id,label])=><button type="button" key={id} aria-current={tab === id ? 'page' : undefined} className={tab === id ? 'active' : ''} onClick={()=>selectTab(id)}>{label}</button>)}</nav><div className="ad-page-title"><div><p className="ad-eyebrow">DAON ANALYTICS</p><h1>{tab === 'overview' ? '문의 흐름을 한눈에' : tab === 'history' ? '전화 클릭 내역' : tab === 'visitors' ? '방문자 분석' : '광고 추적 링크'}</h1><p className="ad-subtitle">{tab === 'links' ? '어떤 광고에서 문의가 들어왔는지 구분하세요.' : '방문부터 전화걸기까지, 사이트의 실제 클릭 기록입니다.'}</p></div>
       {tab !== 'links' && tab !== 'visitors' && <div className="ad-actions"><select aria-label="조회 기간" value={days} onChange={e => { setDays(Number(e.target.value)); setPage(0) }}><option value={1}>오늘</option><option value={7}>최근 7일</option><option value={30}>최근 30일</option><option value={90}>최근 90일</option></select><button className="ad-icon-button" aria-label="새로고침" onClick={load} disabled={busy}><RefreshCw size={18} className={busy ? 'ad-spin' : ''} /></button></div>}</div>
       {error && <div className="ad-error" role="alert">{error}</div>}
       {tab === 'visitors' ? <Visitors /> : tab === 'links' ? <CampaignLinks /> : <>
