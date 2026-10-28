@@ -55,3 +55,5 @@ main h2, main h3, main p { word-break: keep-all; overflow-wrap: anywhere; }
 @keyframes arrivalLift{0%,65%,100%{transform:translateY(0)}78%{transform:translateY(-3px)}88%{transform:translateY(1px)}}
 @keyframes dispatchPulse{50%{opacity:.5;box-shadow:0 0 0 5px #ff626210}}
 @media(max-width:767px){.dispatch-float{right:12px;bottom:calc(84px + env(safe-area-inset-bottom));gap:7px;padding:9px 12px}.dispatch-float-time>span{font-size:22px}}
+
+.analytics-notice{margin-top:16px;padding-top:14px;border-top:1px solid #e0efff;font-size:11px;color:#64748b}.analytics-notice summary{cursor:pointer;width:fit-content}.analytics-notice p{max-width:700px;font-size:11px;line-height:1.9;margin:10px 0}.analytics-notice button{border:1px solid #bfdbfe;border-radius:6px;background:#eff6ff;padding:7px 10px;color:#2563eb;font-size:10px;cursor:pointer}.analytics-notice>span{margin-left:10px;font-size:10px}

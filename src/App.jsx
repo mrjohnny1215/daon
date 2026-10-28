@@ -14,7 +14,7 @@ import {
 import { useEffect, useRef, useState } from 'react'
 import { companyInfo, process as workProcess, reviews, services, strengths } from './data/siteData'
 
-import { trackPhone, trackVisit } from './lib/analytics'
+import { analyticsAllowed, trackPhone, trackVisit } from './lib/analytics'
 
 const PHONE_LINK = 'tel:010-9879-2508'
 
@@ -348,6 +348,18 @@ function Reviews() {
   )
 }
 
+function AnalyticsNotice() {
+  const [enabled, setEnabled] = useState(() => analyticsAllowed())
+  function toggle() {
+    try {
+      if (enabled) { localStorage.setItem('daon.analytics.disabled', '1'); localStorage.removeItem('daon.visitor') }
+      else { localStorage.removeItem('daon.analytics.disabled') }
+      setEnabled(!enabled)
+    } catch { /* Browser storage may be unavailable. */ }
+  }
+  return <details className="analytics-notice"><summary>방문 통계 수집 안내</summary><p>사이트 개선을 위해 익명 방문자 ID(브라우저 내 최대 90일), 방문·전화 클릭, IP 기반 추정 국가, 기기·운영체제·브라우저 및 유입 경로를 수집합니다. 이름·손님 전화번호·원본 IP는 저장하지 않습니다. 정보는 다온설비 관리자가 조회하며 통계 수집은 이 브라우저에서 끌 수 있습니다.</p><button type="button" onClick={toggle}>{enabled ? '이 브라우저에서 통계 수집 끄기' : '통계 수집 다시 켜기'}</button><span role="status">{enabled ? '수집 켜짐' : '수집 꺼짐'}</span></details>
+}
+
 function ContactFooter() {
   return (
     <>
@@ -363,6 +375,7 @@ function ContactFooter() {
           <p className="text-xs">배관·설비 상담 <PhoneLink className="font-bold text-blue-700">{companyInfo.phone}</PhoneLink></p>
           <p className="text-[11px] text-slate-500">© {new Date().getFullYear()} 다온설비</p>
         </div>
+        <div className="mx-auto max-w-5xl"><AnalyticsNotice /></div>
       </footer>
     </>
   )

@@ -1,22 +1,30 @@
+import { visitorId } from './visitor'
 import { attribution } from './attribution'
 const databaseUrl = import.meta.env.VITE_SUPABASE_URL
 const publicKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY
 
+export function analyticsAllowed() {
+  try { return localStorage.getItem('daon.analytics.disabled') !== '1' } catch { return true }
+}
 let lastClick = 0
 function context() {
   try { return attribution({ search: location.search, referrer: document.referrer, hostname: location.hostname, storage: sessionStorage }) } catch { return null }
 }
 function record(event_type, button = '') {
-  if (!databaseUrl || !publicKey || location.pathname.startsWith('/admin')) return
+  if (!analyticsAllowed() || !databaseUrl || !publicKey || location.pathname.startsWith('/admin')) return
   const data = context()
   if (!data) return
   const { updated, signature, ...visitContext } = data
-  const payload = { id: crypto.randomUUID(), ...visitContext, event_type, button,
+  let visitor
+  try { visitor = visitorId(localStorage) } catch {}
+  if (!visitor) visitor = data.session_id
+  const payload = { visitor_id: visitor, id: crypto.randomUUID(), ...visitContext, event_type, button,
     page: location.pathname.slice(0, 180), device: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop' }
   // Keep the telephone action immediate even if analytics is unavailable.
-  fetch(`${databaseUrl}/rest/v1/daon_events`, { method: 'POST', headers: { apikey: publicKey, 'Content-Type': 'application/json', Prefer: 'return=minimal' }, body: JSON.stringify(payload), keepalive: true }).catch(() => {})
+  fetch('/api/collect', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload), keepalive: true }).catch(() => {})
 }
 export function trackVisit() {
+  if (!analyticsAllowed()) return
   const data = context()
   if (!data) return
   try {
