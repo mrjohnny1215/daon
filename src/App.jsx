@@ -209,14 +209,13 @@ function BeforeAfter() {
     ...workProcessSlides.map((slide) => ({ type: 'photo', ...slide })),
   ]
   const [activeSlide, setActiveSlide] = useState(0)
-  const [isPlaying, setIsPlaying] = useState(true)
   const [isHovering, setIsHovering] = useState(false)
 
   useEffect(() => {
-    if (!isPlaying || isHovering || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined
+    if (isHovering || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined
     const timer = window.setInterval(() => setActiveSlide((current) => (current + 1) % slides.length), 6000)
     return () => window.clearInterval(timer)
-  }, [isHovering, isPlaying, slides.length])
+  }, [isHovering, slides.length])
 
   const showSlide = (index) => setActiveSlide((index + slides.length) % slides.length)
   const currentSlide = slides[activeSlide]
@@ -273,12 +272,6 @@ function BeforeAfter() {
             </div>
             <button type="button" onClick={() => showSlide(activeSlide + 1)} className="grid size-11 shrink-0 place-items-center rounded-full border border-slate-200 bg-white text-slate-800 shadow-sm transition hover:bg-sky-50" aria-label="다음 사진">
               <ChevronRight size={21} />
-            </button>
-          </div>
-          <p className="mt-3 text-center text-xs leading-5 text-slate-500">{String(activeSlide + 1).padStart(2, '0')} / {String(slides.length).padStart(2, '0')} · 사진은 서비스 이해를 돕기 위한 예시 이미지입니다.</p>
-          <div className="mt-3 flex justify-center">
-            <button type="button" onClick={() => setIsPlaying((playing) => !playing)} className="min-h-10 rounded-full border border-slate-200 bg-white px-4 text-xs font-bold text-slate-600 transition hover:bg-slate-50" aria-label={isPlaying ? '자동 넘김 일시정지' : '자동 넘김 재생'}>
-              {isPlaying ? '자동 넘김 멈춤' : '자동 넘김 재생'}
             </button>
           </div>
         </div>
