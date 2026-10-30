@@ -1,6 +1,7 @@
 import {
   ArrowRight,
   Check,
+  ChevronLeft,
   ChevronRight,
   Droplets,
   FileCheck2,
@@ -49,6 +50,13 @@ const workCases = [
   { before: '/img/work-example-drain-before.png', after: '/img/work-example-drain-after.png', title: '하수구 배관 세척', beforeLabel: '하수구 배관 막힘', afterLabel: '하수구 배관 세척' },
   { before: '/img/work-example-sink-before.png', after: '/img/work-example-sink-after.png', title: '싱크대 배수관 청소', beforeLabel: '싱크대 배수 막힘', afterLabel: '싱크대 배수관 청소' },
   { before: '/img/work-example-bathroom-before.png', after: '/img/work-example-bathroom-after.png', title: '욕실 배수구 정리', beforeLabel: '욕실 배수구 막힘', afterLabel: '욕실 배수구 청소' },
+]
+
+const workProcessSlides = [
+  { image: '/img/process_intake.png', title: '전화 상담 및 접수', label: '상담 과정 예시', alt: '배관 문제 상담 내용을 기록하는 설비 기사' },
+  { image: '/img/process_inspection.png', title: '배관 내시경 점검', label: '현장 점검 예시', alt: '내시경 장비로 배관 안쪽을 점검하는 설비 기사' },
+  { image: '/img/process_estimate.png', title: '점검 결과와 작업 안내', label: '작업 안내 예시', alt: '점검 결과를 고객에게 설명하는 설비 기사' },
+  { image: '/img/process_completion.png', title: '작업 후 배수 확인', label: '완료 확인 예시', alt: '작업 후 변기 배수 상태를 확인하는 설비 기사' },
 ]
 
 const processImages = [
@@ -196,29 +204,83 @@ function ServiceGrid() {
 }
 
 function BeforeAfter() {
+  const slides = [
+    ...workCases.map((workCase) => ({ type: 'comparison', ...workCase })),
+    ...workProcessSlides.map((slide) => ({ type: 'photo', ...slide })),
+  ]
+  const [activeSlide, setActiveSlide] = useState(0)
+  const [isPlaying, setIsPlaying] = useState(true)
+  const [isHovering, setIsHovering] = useState(false)
+
+  useEffect(() => {
+    if (!isPlaying || isHovering || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined
+    const timer = window.setInterval(() => setActiveSlide((current) => (current + 1) % slides.length), 6000)
+    return () => window.clearInterval(timer)
+  }, [isHovering, isPlaying, slides.length])
+
+  const showSlide = (index) => setActiveSlide((index + slides.length) % slides.length)
+  const currentSlide = slides[activeSlide]
+
   return (
     <section id="work" className="scroll-mt-20 bg-white px-4 py-10 sm:px-7 sm:py-16">
       <div className="mx-auto max-w-5xl">
-        <SectionHeading eyebrow="다온설비 작업 사례" title="작업 전·후 비교" description="막힘 원인을 점검하고 작업 후 배수 상태까지 확인합니다." />
-        <div className="mx-auto mt-5 grid max-w-lg gap-4 sm:mt-6 sm:gap-5">
-          {workCases.map(({ before, after, title, beforeLabel, afterLabel }) => (
-            <figure key={title} className="overflow-hidden rounded-2xl border border-slate-200 bg-slate-50 p-1.5 shadow-sm sm:rounded-3xl sm:p-2">
-              <div className="grid grid-cols-2 overflow-hidden rounded-xl bg-slate-200">
-                <div className="relative aspect-square border-r-2 border-slate-300">
-                  <img src={before} alt={`${beforeLabel} 작업 전 예시`} width="760" height="760" loading="lazy" decoding="async" className="block h-full w-full object-cover" />
-                  <span className="absolute left-2 top-2 rounded-md bg-red-600 px-2 py-1 text-xs font-black text-white shadow sm:text-sm">BEFORE</span>
+        <SectionHeading eyebrow="다온설비 작업 사례" title="작업 전·후 비교" description="현장 점검부터 작업 후 확인까지, 사례 사진을 넘겨보세요." />
+        <div
+          className="mx-auto mt-5 max-w-2xl sm:mt-6"
+          role="region"
+          aria-roledescription="캐러셀"
+          aria-label="다온설비 작업 및 서비스 사례 사진"
+          onMouseEnter={() => setIsHovering(true)}
+          onMouseLeave={() => setIsHovering(false)}
+        >
+          <figure className="overflow-hidden rounded-2xl border border-slate-200 bg-slate-50 p-1.5 shadow-sm sm:rounded-3xl sm:p-2">
+            {currentSlide.type === 'comparison' ? (
+              <>
+                <div className="grid grid-cols-2 overflow-hidden rounded-xl bg-slate-200">
+                  <div className="relative aspect-square border-r-2 border-slate-300">
+                    <img src={currentSlide.before} alt={`${currentSlide.beforeLabel} 작업 전 예시`} width="760" height="760" loading="lazy" decoding="async" className="block h-full w-full object-cover" />
+                    <span className="absolute left-2 top-2 rounded-md bg-red-600 px-2 py-1 text-xs font-black text-white shadow sm:text-sm">BEFORE</span>
+                  </div>
+                  <div className="relative aspect-square">
+                    <img src={currentSlide.after} alt={`${currentSlide.afterLabel} 작업 후 예시`} width="760" height="760" loading="lazy" decoding="async" className="block h-full w-full object-cover" />
+                    <span className="absolute right-2 top-2 rounded-md bg-sky-600 px-2 py-1 text-xs font-black text-white shadow sm:text-sm">AFTER</span>
+                  </div>
                 </div>
-                <div className="relative aspect-square">
-                  <img src={after} alt={`${afterLabel} 작업 후 예시`} width="760" height="760" loading="lazy" decoding="async" className="block h-full w-full object-cover" />
-                  <span className="absolute right-2 top-2 rounded-md bg-sky-600 px-2 py-1 text-xs font-black text-white shadow sm:text-sm">AFTER</span>
+                <figcaption className="grid grid-cols-2 gap-2 px-1.5 pb-1 pt-2 sm:gap-3 sm:px-2 sm:pb-2 sm:pt-3">
+                  <span className="flex min-h-11 items-center justify-center break-keep rounded-xl bg-rose-50 px-1.5 py-2 text-center text-[10px] font-black leading-tight text-rose-700 sm:min-h-12 sm:text-sm">BEFORE · {currentSlide.beforeLabel}</span>
+                  <span className="flex min-h-11 items-center justify-center break-keep rounded-xl bg-blue-50 px-1.5 py-2 text-center text-[10px] font-black leading-tight text-blue-700 sm:min-h-12 sm:text-sm">AFTER · {currentSlide.afterLabel}</span>
+                </figcaption>
+              </>
+            ) : (
+              <>
+                <div className="relative aspect-[3/2] overflow-hidden rounded-xl bg-slate-200">
+                  <img src={currentSlide.image} alt={currentSlide.alt} width="764" height="508" loading="lazy" decoding="async" className="block h-full w-full object-cover" />
+                  <span className="absolute bottom-3 left-3 rounded-full bg-blue-700 px-3 py-1.5 text-xs font-black text-white shadow sm:bottom-4 sm:left-4 sm:text-sm">{currentSlide.label}</span>
                 </div>
-              </div>
-              <figcaption className="grid grid-cols-2 gap-2 px-1.5 pb-1 pt-2 sm:gap-3 sm:px-2 sm:pb-2 sm:pt-3">
-                <span className="flex min-h-11 items-center justify-center break-keep rounded-xl bg-rose-50 px-1.5 py-2 text-center text-[10px] font-black leading-tight text-rose-700 sm:min-h-12 sm:text-sm">BEFORE · {beforeLabel}</span>
-                <span className="flex min-h-11 items-center justify-center break-keep rounded-xl bg-blue-50 px-1.5 py-2 text-center text-[10px] font-black leading-tight text-blue-700 sm:min-h-12 sm:text-sm">AFTER · {afterLabel}</span>
-              </figcaption>
-            </figure>
-          ))}
+                <figcaption className="px-2 py-3 text-center text-sm font-black text-slate-800 sm:text-base">{currentSlide.title}</figcaption>
+              </>
+            )}
+          </figure>
+
+          <div className="mt-4 flex items-center justify-between gap-3">
+            <button type="button" onClick={() => showSlide(activeSlide - 1)} className="grid size-11 shrink-0 place-items-center rounded-full border border-slate-200 bg-white text-slate-800 shadow-sm transition hover:bg-sky-50" aria-label="이전 사진">
+              <ChevronLeft size={21} />
+            </button>
+            <div className="flex min-w-0 flex-1 items-center justify-center gap-1.5" aria-label={`${activeSlide + 1} / ${slides.length}번째 사진`}>
+              {slides.map((slide, index) => (
+                <button key={slide.title} type="button" onClick={() => showSlide(index)} className={`h-2.5 rounded-full transition-all ${index === activeSlide ? 'w-7 bg-blue-700' : 'w-2.5 bg-slate-300 hover:bg-blue-300'}`} aria-label={`${index + 1}번째 사진 보기`} aria-current={index === activeSlide ? 'true' : undefined} />
+              ))}
+            </div>
+            <button type="button" onClick={() => showSlide(activeSlide + 1)} className="grid size-11 shrink-0 place-items-center rounded-full border border-slate-200 bg-white text-slate-800 shadow-sm transition hover:bg-sky-50" aria-label="다음 사진">
+              <ChevronRight size={21} />
+            </button>
+          </div>
+          <p className="mt-3 text-center text-xs leading-5 text-slate-500">{String(activeSlide + 1).padStart(2, '0')} / {String(slides.length).padStart(2, '0')} · 사진은 서비스 이해를 돕기 위한 예시 이미지입니다.</p>
+          <div className="mt-3 flex justify-center">
+            <button type="button" onClick={() => setIsPlaying((playing) => !playing)} className="min-h-10 rounded-full border border-slate-200 bg-white px-4 text-xs font-bold text-slate-600 transition hover:bg-slate-50" aria-label={isPlaying ? '자동 넘김 일시정지' : '자동 넘김 재생'}>
+              {isPlaying ? '자동 넘김 멈춤' : '자동 넘김 재생'}
+            </button>
+          </div>
         </div>
       </div>
     </section>
