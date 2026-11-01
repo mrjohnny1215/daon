@@ -200,11 +200,28 @@ function BeforeAfter() {
   const slides = [
     ...workCases,
     {
-      type: 'composite',
-      image: '/img/before_after.png',
-      title: '배관 내부 세척',
-      beforeLabel: '배관 내부 막힘',
-      afterLabel: '배관 세척 완료',
+      type: 'generated',
+      image: '/img/work-example-floor-drain-generated.png',
+      title: '욕실 바닥 배수구 세척',
+      beforeLabel: '배수구 머리카락 막힘',
+      afterLabel: '배수구 세척 완료',
+      alt: '욕실 바닥 배수구의 세척 전후 비교 예시',
+    },
+    {
+      type: 'generated',
+      image: '/img/work-example-kitchen-trap-generated.png',
+      title: '싱크대 배수 트랩 청소',
+      beforeLabel: '배수 트랩 기름때 막힘',
+      afterLabel: '배수 트랩 세척 완료',
+      alt: '싱크대 배수 트랩의 세척 전후 비교 예시',
+    },
+    {
+      type: 'generated',
+      image: '/img/work-example-toilet-generated.png',
+      title: '변기 막힘 해결',
+      beforeLabel: '변기 배수 막힘',
+      afterLabel: '변기 배수 정상 확인',
+      alt: '변기 막힘 해결 전후 비교 예시',
     },
   ]
   const [activeSlide, setActiveSlide] = useState(0)
@@ -232,10 +249,12 @@ function BeforeAfter() {
           onMouseLeave={() => setIsHovering(false)}
         >
           <figure className="overflow-hidden rounded-2xl border border-slate-200 bg-slate-50 p-1.5 shadow-sm sm:rounded-3xl sm:p-2">
-            {currentSlide.type === 'composite' ? (
+            {currentSlide.type === 'generated' ? (
               <>
-                <div className="aspect-[11/5] overflow-hidden rounded-xl bg-slate-200">
-                  <img src={currentSlide.image} alt="배관 내부 막힘과 세척 후 상태 비포 애프터 비교" width="2912" height="1440" loading="lazy" decoding="async" className="block h-full w-full object-cover" />
+                <div className="relative aspect-[3/2] overflow-hidden rounded-xl bg-slate-200">
+                  <img src={currentSlide.image} alt={currentSlide.alt} width="1536" height="1024" loading="lazy" decoding="async" className="block h-full w-full object-cover" />
+                  <span className="absolute left-3 top-3 rounded-md bg-red-600 px-2 py-1 text-xs font-black text-white shadow sm:left-4 sm:top-4 sm:text-sm">BEFORE</span>
+                  <span className="absolute right-3 top-3 rounded-md bg-sky-600 px-2 py-1 text-xs font-black text-white shadow sm:right-4 sm:top-4 sm:text-sm">AFTER</span>
                 </div>
                 <figcaption className="grid grid-cols-2 gap-2 px-1.5 pb-1 pt-2 sm:gap-3 sm:px-2 sm:pb-2 sm:pt-3">
                   <span className="flex min-h-11 items-center justify-center break-keep rounded-xl bg-rose-50 px-1.5 py-2 text-center text-[10px] font-black leading-tight text-rose-700 sm:min-h-12 sm:text-sm">BEFORE · {currentSlide.beforeLabel}</span>
