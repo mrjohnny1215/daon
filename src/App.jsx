@@ -225,13 +225,11 @@ function BeforeAfter() {
     },
   ]
   const [activeSlide, setActiveSlide] = useState(0)
-  const [isHovering, setIsHovering] = useState(false)
 
   useEffect(() => {
-    if (isHovering || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined
     const timer = window.setInterval(() => setActiveSlide((current) => (current + 1) % slides.length), 6000)
     return () => window.clearInterval(timer)
-  }, [isHovering, slides.length])
+  }, [slides.length])
 
   const showSlide = (index) => setActiveSlide((index + slides.length) % slides.length)
   const currentSlide = slides[activeSlide]
@@ -245,40 +243,37 @@ function BeforeAfter() {
           role="region"
           aria-roledescription="캐러셀"
           aria-label="다온설비 비포 애프터 작업 사례"
-          onMouseEnter={() => setIsHovering(true)}
-          onMouseLeave={() => setIsHovering(false)}
         >
           <figure className="overflow-hidden rounded-2xl border border-slate-200 bg-slate-50 p-1.5 shadow-sm sm:rounded-3xl sm:p-2">
-            {currentSlide.type === 'generated' ? (
-              <>
-                <div className="relative aspect-[3/2] overflow-hidden rounded-xl bg-slate-200">
-                  <img src={currentSlide.image} alt={currentSlide.alt} width="1536" height="1024" loading="lazy" decoding="async" className="block h-full w-full object-cover" />
-                  <span className="absolute left-3 top-3 rounded-md bg-red-600 px-2 py-1 text-xs font-black text-white shadow sm:left-4 sm:top-4 sm:text-sm">BEFORE</span>
-                  <span className="absolute right-3 top-3 rounded-md bg-sky-600 px-2 py-1 text-xs font-black text-white shadow sm:right-4 sm:top-4 sm:text-sm">AFTER</span>
-                </div>
-                <figcaption className="grid grid-cols-2 gap-2 px-1.5 pb-1 pt-2 sm:gap-3 sm:px-2 sm:pb-2 sm:pt-3">
-                  <span className="flex min-h-11 items-center justify-center break-keep rounded-xl bg-rose-50 px-1.5 py-2 text-center text-[10px] font-black leading-tight text-rose-700 sm:min-h-12 sm:text-sm">BEFORE · {currentSlide.beforeLabel}</span>
-                  <span className="flex min-h-11 items-center justify-center break-keep rounded-xl bg-blue-50 px-1.5 py-2 text-center text-[10px] font-black leading-tight text-blue-700 sm:min-h-12 sm:text-sm">AFTER · {currentSlide.afterLabel}</span>
-                </figcaption>
-              </>
-            ) : (
-              <>
-                <div className="grid grid-cols-2 overflow-hidden rounded-xl bg-slate-200">
-                  <div className="relative aspect-square border-r-2 border-slate-300">
-                    <img src={currentSlide.before} alt={`${currentSlide.beforeLabel} 작업 전 예시`} width="760" height="760" loading="lazy" decoding="async" className="block h-full w-full object-cover" />
+            <div className="grid aspect-[2/1] grid-cols-2 overflow-hidden rounded-xl bg-slate-200">
+              {currentSlide.type === 'generated' ? (
+                <>
+                  <div className="relative aspect-square overflow-hidden border-r-2 border-white">
+                    <img src={currentSlide.image} alt={`${currentSlide.alt} (작업 전)`} width="1536" height="1024" loading="eager" decoding="async" className="absolute inset-y-0 left-0 h-full w-[200%] max-w-none object-cover" />
+                    <span className="absolute left-2 top-2 rounded-md bg-red-600 px-2 py-1 text-xs font-black text-white shadow sm:left-3 sm:top-3 sm:text-sm">BEFORE</span>
+                  </div>
+                  <div className="relative aspect-square overflow-hidden">
+                    <img src={currentSlide.image} alt={`${currentSlide.alt} (작업 후)`} width="1536" height="1024" loading="eager" decoding="async" className="absolute inset-y-0 -left-full h-full w-[200%] max-w-none object-cover" />
+                    <span className="absolute right-2 top-2 rounded-md bg-sky-600 px-2 py-1 text-xs font-black text-white shadow sm:right-3 sm:top-3 sm:text-sm">AFTER</span>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="relative aspect-square overflow-hidden border-r-2 border-white">
+                    <img src={currentSlide.before} alt={`${currentSlide.beforeLabel} 작업 전 예시`} width="760" height="760" loading="eager" decoding="async" className="block h-full w-full object-cover" />
                     <span className="absolute left-2 top-2 rounded-md bg-red-600 px-2 py-1 text-xs font-black text-white shadow sm:text-sm">BEFORE</span>
                   </div>
-                  <div className="relative aspect-square">
-                    <img src={currentSlide.after} alt={`${currentSlide.afterLabel} 작업 후 예시`} width="760" height="760" loading="lazy" decoding="async" className="block h-full w-full object-cover" />
+                  <div className="relative aspect-square overflow-hidden">
+                    <img src={currentSlide.after} alt={`${currentSlide.afterLabel} 작업 후 예시`} width="760" height="760" loading="eager" decoding="async" className="block h-full w-full object-cover" />
                     <span className="absolute right-2 top-2 rounded-md bg-sky-600 px-2 py-1 text-xs font-black text-white shadow sm:text-sm">AFTER</span>
                   </div>
-                </div>
-                <figcaption className="grid grid-cols-2 gap-2 px-1.5 pb-1 pt-2 sm:gap-3 sm:px-2 sm:pb-2 sm:pt-3">
-                  <span className="flex min-h-11 items-center justify-center break-keep rounded-xl bg-rose-50 px-1.5 py-2 text-center text-[10px] font-black leading-tight text-rose-700 sm:min-h-12 sm:text-sm">BEFORE · {currentSlide.beforeLabel}</span>
-                  <span className="flex min-h-11 items-center justify-center break-keep rounded-xl bg-blue-50 px-1.5 py-2 text-center text-[10px] font-black leading-tight text-blue-700 sm:min-h-12 sm:text-sm">AFTER · {currentSlide.afterLabel}</span>
-                </figcaption>
-              </>
-            )}
+                </>
+              )}
+            </div>
+            <figcaption className="grid grid-cols-2 gap-2 px-1.5 pb-1 pt-2 sm:gap-3 sm:px-2 sm:pb-2 sm:pt-3">
+              <span className="flex min-h-11 items-center justify-center break-keep rounded-xl bg-rose-50 px-1.5 py-2 text-center text-[10px] font-black leading-tight text-rose-700 sm:min-h-12 sm:text-sm">BEFORE · {currentSlide.beforeLabel}</span>
+              <span className="flex min-h-11 items-center justify-center break-keep rounded-xl bg-blue-50 px-1.5 py-2 text-center text-[10px] font-black leading-tight text-blue-700 sm:min-h-12 sm:text-sm">AFTER · {currentSlide.afterLabel}</span>
+            </figcaption>
           </figure>
 
           <div className="mt-4 flex items-center justify-between gap-3">
