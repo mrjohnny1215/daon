@@ -216,6 +216,14 @@ function BeforeAfter() {
     },
     {
       type: 'generated',
+      image: '/img/work-example-heating-generated.png',
+      title: '난방배관 청소',
+      beforeLabel: '난방배관 세척 전 (작업 예시)',
+      afterLabel: '난방배관 세척 후 (작업 예시)',
+      alt: '난방배관 분배기와 세척수의 청소 전후 예시',
+    },
+    {
+      type: 'generated',
       image: '/img/work-example-toilet-generated.png',
       title: '변기 막힘 해결',
       beforeLabel: '변기 배수 막힘',
@@ -236,7 +244,7 @@ function BeforeAfter() {
   return (
     <section id="work" className="scroll-mt-20 bg-white px-4 py-10 sm:px-7 sm:py-16">
       <div className="mx-auto max-w-5xl">
-        <SectionHeading eyebrow="바른설비 작업 사례" title="작업 전·후 비교" description="막힌 배관과 세척 후 모습을 비교해보세요." />
+        <SectionHeading eyebrow="바른설비 작업 사례" title="작업 전·후 비교" description="배관과 난방 설비의 세척 전후를 비교해보세요. 일부 이미지는 작업 예시입니다." />
         <div
           className="mx-auto mt-5 max-w-2xl sm:mt-6"
           role="region"
