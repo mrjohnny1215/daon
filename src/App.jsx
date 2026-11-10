@@ -164,7 +164,7 @@ function Hero() {
         <div className="overflow-hidden">
           <div className="hero-banner relative">
             <h1 className="sr-only">바른설비 | 서울·수도권 24시간 배관케어</h1>
-            <img src="/img/daon-hero-portrait.png" alt="바른설비 배관·설비 서비스 안내. 변기·싱크대·하수구 막힘, 누수 탐지와 간단 수리 상담. 24시간 전화 상담 010-9879-2508." width="572" height="1024" fetchPriority="high" className="block h-auto w-full" />
+            <img src="/img/bareun-hero.png" alt="바른설비 배관·설비 서비스 안내. 변기·싱크대·하수구 막힘, 누수 탐지와 간단 수리 상담. 24시간 전화 상담 010-9879-2508." width="937" height="1678" fetchPriority="high" className="block h-auto w-full" />
           </div>
         </div>
       </div>
