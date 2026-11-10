@@ -196,6 +196,22 @@ function BeforeAfter() {
     ...workCases,
     {
       type: 'generated',
+      image: '/img/work-example-leak-detection-generated.png',
+      title: '누수탐지',
+      beforeLabel: '누수 의심 구간 점검 (작업 예시)',
+      afterLabel: '탐지 위치 확인 (작업 예시)',
+      alt: '누수 탐지 장비로 욕실 바닥의 누수 의심 위치를 확인하는 작업 예시',
+    },
+    {
+      type: 'generated',
+      image: '/img/work-example-toilet-generated.png',
+      title: '변기 막힘 해결',
+      beforeLabel: '변기 배수 막힘',
+      afterLabel: '변기 배수 정상 확인',
+      alt: '변기 막힘 해결 전후 비교 예시',
+    },
+    {
+      type: 'generated',
       image: '/img/work-example-kitchen-trap-generated.png',
       title: '싱크대 배수 트랩 청소',
       beforeLabel: '배수 트랩 기름때 막힘',
@@ -212,14 +228,6 @@ function BeforeAfter() {
     },
     {
       type: 'generated',
-      image: '/img/work-example-water-thaw-generated.png',
-      title: '수도관 해빙',
-      beforeLabel: '얼어붙은 수도관 (작업 예시)',
-      afterLabel: '해빙 후 물 흐름 확인 (작업 예시)',
-      alt: '전기 해빙 장비로 얼어붙은 수도관을 녹이고 통수를 확인하는 작업 예시',
-    },
-    {
-      type: 'generated',
       image: '/img/work-example-heating-thaw-generated.png',
       title: '난방배관 해빙',
       beforeLabel: '동결된 난방 분배기 (작업 예시)',
@@ -228,19 +236,11 @@ function BeforeAfter() {
     },
     {
       type: 'generated',
-      image: '/img/work-example-leak-detection-generated.png',
-      title: '누수탐지',
-      beforeLabel: '누수 의심 구간 점검 (작업 예시)',
-      afterLabel: '탐지 위치 확인 (작업 예시)',
-      alt: '누수 탐지 장비로 욕실 바닥의 누수 의심 위치를 확인하는 작업 예시',
-    },
-    {
-      type: 'generated',
-      image: '/img/work-example-toilet-generated.png',
-      title: '변기 막힘 해결',
-      beforeLabel: '변기 배수 막힘',
-      afterLabel: '변기 배수 정상 확인',
-      alt: '변기 막힘 해결 전후 비교 예시',
+      image: '/img/work-example-water-thaw-generated.png',
+      title: '수도관 해빙',
+      beforeLabel: '얼어붙은 수도관 (작업 예시)',
+      afterLabel: '해빙 후 물 흐름 확인 (작업 예시)',
+      alt: '전기 해빙 장비로 얼어붙은 수도관을 녹이고 통수를 확인하는 작업 예시',
     },
   ]
   return (
