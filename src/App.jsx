@@ -5,6 +5,7 @@ import {
   ChevronRight,
   Droplets,
   FileCheck2,
+  X,
   Menu,
   MessageCircle,
   Phone,
@@ -113,7 +114,7 @@ function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200/80 bg-white/95 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-4 sm:h-[72px] sm:px-7">
-        <a href="#home" className="inline-flex min-h-12 items-center gap-2.5" aria-label="다온설비 홈">
+        <a href="#home" className="inline-flex min-h-12 items-center gap-2.5" aria-label="바른설비 홈">
           <span className="grid size-9 place-items-center rounded-xl bg-blue-700 text-white sm:size-10"><Droplets size={21} /></span>
           <span className="text-lg font-black tracking-tight text-slate-900">{companyInfo.name}</span>
         </a>
@@ -131,7 +132,7 @@ function Header() {
           aria-expanded={menuOpen}
           aria-controls="mobile-navigation"
         >
-          <Menu size={23} />
+          {menuOpen ? <X size={23} /> : <Menu size={23} />}
         </button>
       </div>
       {menuOpen && (
@@ -162,10 +163,8 @@ function Hero() {
       <div className="mx-auto w-full max-w-5xl overflow-hidden">
         <div className="overflow-hidden">
           <div className="hero-banner relative">
-            <h1 className="sr-only">다온설비 | 서울·수도권 24시간 배관케어</h1>
-            <PhoneLink className="block" aria-label="다온설비 전화 상담 010-9879-2508">
-              <img src="/img/daon-hero-portrait.png" alt="다온설비, 막힘부터 누수까지 전문가가 해결합니다. 정확한 진단, 빠른 출동, 합리적인 비용, 확실한 A/S. 변기, 싱크대, 하수구, 누수탐지, 간단수리. 24시 출장대기 010-9879-2508" width="572" height="1024" fetchPriority="high" className="block h-auto w-full" />
-            </PhoneLink>
+            <h1 className="sr-only">바른설비 | 서울·수도권 24시간 배관케어</h1>
+            <img src="/img/daon-hero-portrait.png" alt="바른설비 배관·설비 서비스 안내. 변기·싱크대·하수구 막힘, 누수 탐지와 간단 수리 상담. 24시간 전화 상담 010-9879-2508." width="572" height="1024" fetchPriority="high" className="block h-auto w-full" />
           </div>
         </div>
       </div>
@@ -177,7 +176,7 @@ function ServiceGrid() {
   return (
     <section id="services" className="scroll-mt-24 bg-sky-50 px-4 py-10 sm:px-7 sm:py-16">
       <div className="mx-auto max-w-5xl">
-        <SectionHeading eyebrow="다온설비 주요 서비스" title="막힘부터 누수까지" description="현장을 확인하고 필요한 작업과 비용을 먼저 안내합니다." />
+        <SectionHeading eyebrow="바른설비 주요 서비스" title="막힘부터 누수까지" description="현장을 확인하고 필요한 작업과 비용을 먼저 안내합니다." />
         <div className="grid gap-2.5 sm:grid-cols-2 sm:gap-4">
           {services.map((service, index) => (
             <article key={service.title} className="flex min-h-[94px] min-w-0 items-center gap-3 rounded-2xl border border-sky-200 bg-white p-2.5 shadow-sm sm:min-h-[112px] sm:gap-4 sm:p-3">
@@ -237,12 +236,12 @@ function BeforeAfter() {
   return (
     <section id="work" className="scroll-mt-20 bg-white px-4 py-10 sm:px-7 sm:py-16">
       <div className="mx-auto max-w-5xl">
-        <SectionHeading eyebrow="다온설비 작업 사례" title="작업 전·후 비교" description="막힌 배관과 세척 후 모습을 비교해보세요." />
+        <SectionHeading eyebrow="바른설비 작업 사례" title="작업 전·후 비교" description="막힌 배관과 세척 후 모습을 비교해보세요." />
         <div
           className="mx-auto mt-5 max-w-2xl sm:mt-6"
           role="region"
           aria-roledescription="캐러셀"
-          aria-label="다온설비 비포 애프터 작업 사례"
+          aria-label="바른설비 비포 애프터 작업 사례"
         >
           <figure className="overflow-hidden rounded-2xl border border-slate-200 bg-slate-50 p-1.5 shadow-sm sm:rounded-3xl sm:p-2">
             <div className="grid aspect-[2/1] grid-cols-2 overflow-hidden rounded-xl bg-slate-200">
@@ -376,7 +375,7 @@ function StrengthSection() {
   return (
     <section className="bg-white px-4 py-10 sm:px-7 sm:py-16">
       <div className="mx-auto max-w-5xl">
-        <SectionHeading eyebrow="다온설비가 다른 이유" title="다온설비를 선택하는 이유" description="꼼꼼한 점검과 정직한 설명으로 믿을 수 있는 서비스를 제공합니다." />
+        <SectionHeading eyebrow="바른설비가 다른 이유" title="바른설비를 선택하는 이유" description="꼼꼼한 점검과 정직한 설명으로 믿을 수 있는 서비스를 제공합니다." />
         <div ref={gridRef} className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4">
           {strengths.map(({ title, desc, icon: Icon }, index) => (
             <article key={title} style={{ animationDelay: `${index * 1.5}s` }} className={`strength-step min-h-32 rounded-2xl border border-slate-100 bg-white p-4 shadow-sm sm:min-h-0 sm:rounded-3xl sm:p-6 ${stepsVisible ? 'strength-step-visible' : ''}`}>
@@ -427,7 +426,7 @@ function AnalyticsNotice() {
       setEnabled(!enabled)
     } catch { /* Browser storage may be unavailable. */ }
   }
-  return <details className="analytics-notice"><summary>방문 통계 수집 안내</summary><p>사이트 개선을 위해 익명 방문자 ID(브라우저 내 최대 90일), 방문·전화 클릭, IP 기반 추정 국가, 기기·운영체제·브라우저 및 유입 경로를 수집합니다. 이름·손님 전화번호·원본 IP는 저장하지 않습니다. 정보는 다온설비 관리자가 조회하며 통계 수집은 이 브라우저에서 끌 수 있습니다.</p><button type="button" onClick={toggle}>{enabled ? '이 브라우저에서 통계 수집 끄기' : '통계 수집 다시 켜기'}</button><span role="status">{enabled ? '수집 켜짐' : '수집 꺼짐'}</span></details>
+  return <details className="analytics-notice"><summary>방문 통계 수집 안내</summary><p>사이트 개선을 위해 익명 방문자 ID(브라우저 내 최대 90일), 방문·전화 클릭, IP 기반 추정 국가, 기기·운영체제·브라우저 및 유입 경로를 수집합니다. 이름·손님 전화번호·원본 IP는 저장하지 않습니다. 정보는 바른설비 관리자가 조회하며 통계 수집은 이 브라우저에서 끌 수 있습니다.</p><button type="button" onClick={toggle}>{enabled ? '이 브라우저에서 통계 수집 끄기' : '통계 수집 다시 켜기'}</button><span role="status">{enabled ? '수집 켜짐' : '수집 꺼짐'}</span></details>
 }
 
 function ContactFooter() {
@@ -435,7 +434,7 @@ function ContactFooter() {
     <>
       <section id="contact" className="bg-sky-50 px-4 py-10 text-slate-900 sm:px-7 sm:py-14">
         <div className="mx-auto flex max-w-5xl flex-col items-start justify-between gap-4 sm:flex-row sm:items-center sm:gap-5">
-          <div><p className="text-sm font-black text-blue-700 sm:text-base">다온설비 배관·설비 상담</p><h2 className="mt-2 break-keep text-2xl font-black tracking-tight sm:text-3xl">불편한 순간, 다온설비에 전화하세요.</h2><p className="mt-2 text-sm leading-6 text-blue-700">증상을 듣고 가능한 방문 일정을 안내해드립니다.</p></div>
+          <div><p className="text-sm font-black text-blue-700 sm:text-base">바른설비 배관·설비 상담</p><h2 className="mt-2 break-keep text-2xl font-black tracking-tight sm:text-3xl">불편한 순간, 바른설비에 전화하세요.</h2><p className="mt-2 text-sm leading-6 text-blue-700">증상을 듣고 가능한 방문 일정을 안내해드립니다.</p></div>
           <PhoneLink className="flex min-h-14 w-full items-center justify-center gap-3 rounded-xl bg-blue-600 px-6 font-black text-white shadow-md transition hover:bg-blue-700 sm:w-auto"><PhoneCall size={20} /> {companyInfo.phone} <ArrowRight size={18} /></PhoneLink>
         </div>
       </section>
@@ -443,7 +442,7 @@ function ContactFooter() {
         <div className="mx-auto flex max-w-5xl flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <a href="#home" className="inline-flex min-h-12 items-center gap-2 font-black text-blue-700"><Droplets size={19} className="text-blue-600" />{companyInfo.name}</a>
           <p className="text-xs">배관·설비 상담 <PhoneLink className="font-bold text-blue-700">{companyInfo.phone}</PhoneLink></p>
-          <p className="text-[11px] text-slate-500">© {new Date().getFullYear()} 다온설비</p>
+          <p className="text-[11px] text-slate-500">© {new Date().getFullYear()} 바른설비</p>
         </div>
         <div className="mx-auto max-w-5xl"><AnalyticsNotice /></div>
       </footer>
@@ -471,8 +470,8 @@ export default function App() {
         <Hero />
         <ServiceGrid />
         <BeforeAfter />
-        <section aria-label="다온설비 배관 업체 비교 안내" className="w-full overflow-hidden bg-sky-50">
-<div className="mx-auto max-w-5xl px-4 py-10 text-center sm:px-7 sm:py-16"><p className="font-bold text-blue-700">우리 동네 배관 해결사, 다온설비</p><h2 className="mt-3 text-2xl font-black sm:text-4xl">꼼꼼하게 비교하고 선택하세요</h2><p className="mt-4 leading-7 text-slate-600">작업 전 원인 설명 · 사전 견적 안내 · 작업 후 배수 확인<br />처음 상담부터 마무리 점검까지 다온설비가 함께합니다.</p></div>
+        <section aria-label="바른설비 배관 업체 비교 안내" className="w-full overflow-hidden bg-sky-50">
+<div className="mx-auto max-w-5xl px-4 py-10 text-center sm:px-7 sm:py-16"><p className="font-bold text-blue-700">우리 동네 배관 해결사, 바른설비</p><h2 className="mt-3 text-2xl font-black sm:text-4xl">꼼꼼하게 비교하고 선택하세요</h2><p className="mt-4 leading-7 text-slate-600">작업 전 원인 설명 · 사전 견적 안내 · 작업 후 배수 확인<br />처음 상담부터 마무리 점검까지 바른설비가 함께합니다.</p></div>
         </section>
         <PromiseSection />
         <ProcessSection />

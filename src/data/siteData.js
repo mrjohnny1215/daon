@@ -18,7 +18,7 @@ import {
 } from 'lucide-react'
 
 export const companyInfo = {
-  name: '다온설비',
+  name: '바른설비',
   phone: '010-9879-2508',
   telLink: 'tel:010-9879-2508',
 }

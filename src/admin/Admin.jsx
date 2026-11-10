@@ -35,7 +35,7 @@ function Auth({ onSession }) {
     finally { setBusy(false) }
   }
   return <div className="daon-admin-auth"><div className="daon-admin-auth-card">
-    <a href="/" className="daon-admin-brand"><span><Droplets size={23} /></span>다온설비<span className="daon-admin-brand-tag">ADMIN</span></a>
+    <a href="/" className="daon-admin-brand"><span><Droplets size={23} /></span>바른설비<span className="daon-admin-brand-tag">ADMIN</span></a>
     <div className="daon-admin-auth-icon"><LockKeyhole size={27} /></div><p className="daon-admin-eyebrow">PRIVATE WORKSPACE</p>
     <h1>{mode === 'login' ? '관리자 로그인' : '관리자 계정 등록'}</h1><p className="daon-admin-subtitle">전화 문의로 이어지는 흐름을 한눈에 확인하세요.</p>
     <form onSubmit={submit}><label>이메일<input type="email" autoComplete="username" value={email} onChange={e => setEmail(e.target.value)} placeholder="관리자 이메일" required maxLength={254} /></label>
@@ -43,7 +43,7 @@ function Auth({ onSession }) {
     {message && <p className="daon-admin-message" role="status">{message}</p>}<button className="daon-admin-primary" disabled={busy || !supabase}>{busy ? '처리 중…' : mode === 'login' ? '대시보드 로그인' : '인증 메일 받기'}<ArrowLeft size={17} style={{ transform: 'rotate(180deg)' }} /></button></form>
     <button className="daon-admin-text-button" onClick={() => { setMode(mode === 'login' ? 'register' : 'login'); setMessage('') }}>{mode === 'login' ? '처음 이용하시나요? 관리자 계정 등록' : '이미 계정이 있나요? 로그인'}</button>
     <a href="/" className="daon-admin-back"><ArrowLeft size={14} /> 사이트로 돌아가기</a><p className="daon-admin-auth-note">허용된 관리자 계정만 기록을 조회할 수 있습니다.</p>
-  </div><p className="daon-admin-copyright">© {new Date().getFullYear()} 다온설비 · 관리자 전용</p></div>
+  </div><p className="daon-admin-copyright">© {new Date().getFullYear()} 바른설비 · 관리자 전용</p></div>
 }
 function CampaignLinks() {
   const [source, setSource] = useState('naver'), [campaign, setCampaign] = useState(''), [copied, setCopied] = useState(false)
@@ -62,7 +62,7 @@ export default function Admin() {
   const [tab, setTab] = useState(() => { const view = new URLSearchParams(location.search).get('view'); return ['overview', 'history', 'visitors', 'links'].includes(view) ? view : 'visitors' }), [days, setDays] = useState(1), [source, setSource] = useState('all'), [page, setPage] = useState(0)
   const [stats, setStats] = useState(null), [rows, setRows] = useState([]), [count, setCount] = useState(0), [busy, setBusy] = useState(false), [error, setError] = useState(''), [updated, setUpdated] = useState(null), [exporting, setExporting] = useState(false)
   useEffect(() => {
-    document.title = '다온설비 관리자 | 전화 클릭 분석'
+    document.title = '바른설비 관리자 | 전화 클릭 분석'
     const meta = document.createElement('meta'); meta.name = 'robots'; meta.content = 'noindex,nofollow'; document.head.append(meta)
     if (!supabase) { setReady(true); return () => meta.remove() }
     let active = true
@@ -110,7 +110,7 @@ export default function Admin() {
       }
       const cell = value => '"' + String(value ?? '').replace(/^[=+@\-\t\r]/, "'" + String(value ?? '').charAt(0)).replaceAll('"', '""') + '"'
       const csv = [['클릭 시각(한국)', '유입 경로', '유입 유형', '캠페인', '버튼 위치', '기기'], ...all.map(r => [dateTime(r.created_at), names[r.source], r.medium, r.campaign, buttons[r.button] || r.button, ({mobile:'모바일',tablet:'태블릿',desktop:'PC',unknown:'미확인'}[r.device] || '미확인')])].map(r => r.map(cell).join(',')).join('\r\n')
-      const url = URL.createObjectURL(new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8' })); const a = document.createElement('a'); a.href = url; a.download = '다온설비_전화클릭.csv'; a.click(); URL.revokeObjectURL(url)
+      const url = URL.createObjectURL(new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8' })); const a = document.createElement('a'); a.href = url; a.download = '바른설비_전화클릭.csv'; a.click(); URL.revokeObjectURL(url)
     } catch { setError('파일을 내보내지 못했습니다. 다시 시도해주세요.') } finally { setExporting(false) }
   }
   if (!ready) return <div className="daon-admin-loading">관리자 페이지 연결 중…</div>
@@ -120,11 +120,11 @@ export default function Admin() {
   const maximum = Math.max(...daily.map(d => d.clicks), 1)
   const rate = stats?.sessions ? Math.min(100, (stats.callers / stats.sessions) * 100).toFixed(1) : '0.0'
   return <div className="daon-admin-shell">
-    <aside className="daon-admin-sidebar"><a className="daon-admin-brand" href="/admin"><span><Droplets size={23} /></span>다온설비</a><p className="daon-admin-sidebar-caption">문의 분석 관리자</p>
+    <aside className="daon-admin-sidebar"><a className="daon-admin-brand" href="/admin"><span><Droplets size={23} /></span>바른설비</a><p className="daon-admin-sidebar-caption">문의 분석 관리자</p>
       <nav aria-label="관리자 메뉴">{[['overview', BarChart3, '대시보드'], ['history', PhoneCall, '전화 클릭 내역'], ['visitors', Users, '방문자 분석'], ['links', Link2, '광고 추적 링크']].map(([id, Icon, label]) => <button key={id} className={tab === id ? 'active' : ''} onClick={() => selectTab(id)}><Icon size={18} />{label}</button>)}</nav>
       <div className="daon-admin-sidebar-bottom"><a href="/" target="_blank" rel="noreferrer"><ExternalLink size={16} />사이트 보기</a><button onClick={logout}><LogOut size={16} />로그아웃</button><p>{session.user.email}</p></div>
     </aside>
-    <main className="daon-admin-content"><header className="daon-admin-topbar"><span>다온설비 <span>/ 관리자</span></span><span className="daon-admin-secure"><LockKeyhole size={12} />관리자 전용</span></header>
+    <main className="daon-admin-content"><header className="daon-admin-topbar"><span>바른설비 <span>/ 관리자</span></span><span className="daon-admin-secure"><LockKeyhole size={12} />관리자 전용</span></header>
       <div className="daon-admin-main"><nav className="daon-admin-view-tabs" aria-label="통계 화면 선택">{[['visitors','접속·국가·기기 통계'],['overview','전화 문의 요약'],['history','전화 클릭 내역'],['links','광고 추적 링크']].map(([id,label])=><button type="button" key={id} aria-current={tab === id ? 'page' : undefined} className={tab === id ? 'active' : ''} onClick={()=>selectTab(id)}>{label}</button>)}</nav><div className="daon-admin-page-title"><div><p className="daon-admin-eyebrow">DAON ANALYTICS</p><h1>{tab === 'overview' ? '문의 흐름을 한눈에' : tab === 'history' ? '전화 클릭 내역' : tab === 'visitors' ? '방문자 분석' : '광고 추적 링크'}</h1><p className="daon-admin-subtitle">{tab === 'links' ? '어떤 광고에서 문의가 들어왔는지 구분하세요.' : '방문부터 전화걸기까지, 사이트의 실제 클릭 기록입니다.'}</p></div>
       {tab !== 'links' && tab !== 'visitors' && <div className="daon-admin-actions"><select aria-label="조회 기간" value={days} onChange={e => { setDays(Number(e.target.value)); setPage(0) }}><option value={1}>오늘</option><option value={7}>최근 7일</option><option value={30}>최근 30일</option><option value={90}>최근 90일</option></select><button className="daon-admin-icon-button" aria-label="새로고침" onClick={load} disabled={busy}><RefreshCw size={18} className={busy ? 'daon-admin-spin' : ''} /></button></div>}</div>
       {error && <div className="daon-admin-error" role="alert">{error}</div>}
