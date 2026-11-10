@@ -47,8 +47,6 @@ const serviceSummaries = [
 
 const workCases = [
   { before: '/img/work-example-drain-before.png', after: '/img/work-example-drain-after.png', title: '하수구 배관 세척', beforeLabel: '하수구 배관 막힘', afterLabel: '하수구 배관 세척' },
-  { before: '/img/work-example-sink-before.png', after: '/img/work-example-sink-after.png', title: '싱크대 배수관 청소', beforeLabel: '싱크대 배수 막힘', afterLabel: '싱크대 배수관 청소' },
-  { before: '/img/work-example-bathroom-before.png', after: '/img/work-example-bathroom-after.png', title: '욕실 배수구 정리', beforeLabel: '욕실 배수구 막힘', afterLabel: '욕실 배수구 청소' },
 ]
 
 const processImages = [
@@ -196,14 +194,6 @@ function ServiceGrid() {
 function BeforeAfter() {
   const cases = [
     ...workCases,
-    {
-      type: 'generated',
-      image: '/img/work-example-floor-drain-generated.png',
-      title: '욕실 바닥 배수구 세척',
-      beforeLabel: '배수구 머리카락 막힘',
-      afterLabel: '배수구 세척 완료',
-      alt: '욕실 바닥 배수구의 세척 전후 비교 예시',
-    },
     {
       type: 'generated',
       image: '/img/work-example-kitchen-trap-generated.png',
