@@ -7,24 +7,11 @@
 
 ## 관리자 계정 연결
 
-운영자 이메일을 확인한 다음 Supabase SQL Editor에서 승인합니다. 이메일은 사용자에게 직접 받은 값을 사용합니다.
-
-```sql
-insert into daon_private.admin_allowlist(email)
-values (lower('사용자가 확인한 이메일')) on conflict do nothing;
--- 이미 인증한 계정이 있다면 권한을 동기화합니다.
-insert into public.daon_admins(user_id)
-select id from auth.users
-where lower(email) in (select email from daon_private.admin_allowlist)
-and email_confirmed_at is not null
-on conflict do nothing;
-```
-
-`/admin`에서는 승인된 Supabase 관리자 이메일과 해당 계정 비밀번호로 로그인합니다. 이메일을 `VITE_` 환경변수에 넣지 않아 공개하지 않으며, 비밀번호를 앱 코드나 Vercel 환경변수에 저장하지 않습니다.
-초기 운영 계정은 아래 절차로 등록합니다. 운영자는 이메일 계정 등록 → 이메일 인증 후 관리자 승인을 받은 다음, 등록한 이메일로 로그인합니다.
+누구나 `/admin`에서 이메일과 비밀번호로 가입할 수 있습니다. 이메일 인증 후에는 관리자 승인 대기 상태가 됩니다. `mrjohnny1215@gmail.com` 계정만 관리자 메뉴의 **관리자 가입 승인**에서 요청을 승인하거나 거부할 수 있습니다.
+승인된 계정만 `daon_admins`에 등록되어 기록을 조회할 수 있습니다. 비밀번호는 Supabase Auth에서 확인하며 앱 코드나 Vercel 환경변수에 저장하지 않습니다.
 Supabase Authentication → URL Configuration의 Site URL을 `https://daon-tau.vercel.app/admin`으로 설정하고,
 Redirect URLs에 두 운영 도메인의 `/admin` 경로를 등록합니다.
-메일 인증을 마치면 관리자 화면으로 돌아와 로그인합니다. 초기 설정 전에는 승인된 계정이 없으므로 통계 접근은 차단됩니다.
+메일 인증을 마치면 관리자 계정이 승인 대기 목록에 표시됩니다.
 
 ## 저장 항목과 통계 정의
 
@@ -42,7 +29,7 @@ Redirect URLs에 두 운영 도메인의 `/admin` 경로를 등록합니다.
 모든 공개 테이블에 RLS를 적용했습니다.
 익명 방문자는 이벤트 삽입만 가능하며 서버 시각을 지정하거나 조회·수정·삭제할 수 없습니다.
 인증 계정도 `daon_admins`에 등록되어야 이벤트를 읽을 수 있습니다.
-관리자 허용 이메일은 비공개 `daon_private` 스키마에 저장하고, 이메일 인증 완료 시 트리거로 권한을 부여합니다.
+이메일 인증 완료 시 `daon_admin_requests`에 승인 요청이 생성됩니다. 승인·거부 RPC는 고정된 소유자 사용자 ID만 실행할 수 있으며, 요청 테이블은 RLS가 켜져 있고 anon/authenticated 직접 접근을 허용하지 않습니다.
 집계 함수 `daon_summary`는 security invoker로 RLS를 따릅니다.
 공개 수집 엔드포인트이므로 위조·봇 클릭은 완전히 방지되지 않습니다. 통계는 결제나 청구의 근거로 사용하지 않습니다.
 
