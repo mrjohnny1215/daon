@@ -41,7 +41,7 @@ function Auth({ onSession }) {
     <form onSubmit={submit} noValidate><label>이메일<input type="email" autoComplete="username" value={username} onChange={e => setUsername(e.target.value)} placeholder="관리자 이메일" required maxLength={254} /></label>
     <label>비밀번호<input type="password" autoComplete={mode === 'login' ? 'current-password' : 'new-password'} value={password} onChange={e => setPassword(e.target.value)} minLength={mode === 'register' ? 12 : 1} placeholder={mode === 'register' ? '12자 이상 입력' : '비밀번호 입력'} required /></label>
     {message && <p className="daon-admin-message" role="status">{message}</p>}<button className="daon-admin-primary" disabled={busy || !supabase}>{busy ? '처리 중…' : mode === 'login' ? '대시보드 로그인' : '인증 메일 받기'}<ArrowLeft size={17} style={{ transform: 'rotate(180deg)' }} /></button></form>
-    {mode === 'register' && <button type="button" className="daon-admin-text-button" onClick={() => { setMode('login'); setMessage('') }}>관리자 로그인으로 돌아가기</button>}
+    <button type="button" className="daon-admin-text-button" onClick={() => { setMode(mode === 'login' ? 'register' : 'login'); setMessage('') }}>{mode === 'login' ? '처음 이용하시나요? 관리자 계정 등록' : '관리자 로그인으로 돌아가기'}</button>
     <a href="/" className="daon-admin-back"><ArrowLeft size={14} /> 사이트로 돌아가기</a><p className="daon-admin-auth-note">허용된 관리자 계정만 기록을 조회할 수 있습니다.</p>
   </div><p className="daon-admin-copyright">© {new Date().getFullYear()} 바른설비 · 관리자 전용</p></div>
 }
