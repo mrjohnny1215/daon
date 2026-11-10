@@ -212,6 +212,22 @@ function BeforeAfter() {
     },
     {
       type: 'generated',
+      image: '/img/work-example-water-thaw-generated.png',
+      title: '수도관 해빙',
+      beforeLabel: '얼어붙은 수도관 (작업 예시)',
+      afterLabel: '해빙 후 물 흐름 확인 (작업 예시)',
+      alt: '전기 해빙 장비로 얼어붙은 수도관을 녹이고 통수를 확인하는 작업 예시',
+    },
+    {
+      type: 'generated',
+      image: '/img/work-example-heating-thaw-generated.png',
+      title: '난방배관 해빙',
+      beforeLabel: '동결된 난방 분배기 (작업 예시)',
+      afterLabel: '해빙 후 순환 확인 (작업 예시)',
+      alt: '동결된 난방 분배기를 해빙한 뒤 순환을 확인하는 작업 예시',
+    },
+    {
+      type: 'generated',
       image: '/img/work-example-leak-detection-generated.png',
       title: '누수탐지',
       beforeLabel: '누수 의심 구간 점검 (작업 예시)',
@@ -230,7 +246,7 @@ function BeforeAfter() {
   return (
     <section id="work" className="scroll-mt-20 bg-white px-4 py-10 sm:px-7 sm:py-16">
       <div className="mx-auto max-w-5xl">
-        <SectionHeading eyebrow="바른설비 작업 사례" title="작업 전·후 비교" description="배관·난방 설비 청소와 누수 점검 모습을 비교해보세요. 일부 이미지는 작업 예시입니다." />
+        <SectionHeading eyebrow="바른설비 작업 사례" title="작업 전·후 비교" description="수도·난방배관 해빙과 청소, 누수 점검 모습을 확인해보세요. 일부 이미지는 작업 예시입니다." />
         <div className="mx-auto mt-5 grid max-w-4xl gap-5 sm:mt-6 lg:grid-cols-2" role="list" aria-label="바른설비 작업 전후 사례">
           {cases.map((item, index) => (
             <figure key={item.title} role="listitem" className="overflow-hidden rounded-2xl border border-slate-200 bg-slate-50 p-1.5 shadow-sm sm:rounded-3xl sm:p-2">
