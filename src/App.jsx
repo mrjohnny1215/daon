@@ -204,6 +204,13 @@ function ServiceGrid() {
           ))}
         </div>
         <p className="mx-auto mt-4 max-w-max rounded-full bg-slate-900 px-4 py-2 text-center text-[10px] font-semibold leading-4 text-white sm:mt-5 sm:text-xs">※ 작업 범위와 비용은 현장 상태를 확인한 뒤 안내해드립니다.</p>
+        <div className="mx-auto mt-6 max-w-3xl rounded-2xl border border-sky-100 bg-white/80 px-4 py-4 text-center sm:mt-8 sm:px-6">
+          <h3 className="text-sm font-black text-slate-800 sm:text-base">서울·수도권 배관·설비 상담</h3>
+          <p className="mt-2 break-keep text-xs leading-6 text-slate-600 sm:text-sm">
+            변기·소변기·세면대·욕조·싱크대와 욕실 배수구 막힘, 하수구·배수구·오수관·우수관 역류와 배관 누수를 점검합니다. 수도·수전·수도꼭지 부품 교체, 수도·난방 배관 수리와 동파, 누수 탐지, 욕실·옥상 방수도 상담 후 작업 범위와 견적을 안내해드립니다.
+          </p>
+          <p className="mt-1.5 break-keep text-[11px] leading-5 text-slate-500 sm:text-xs">서울·경기·인천 등 수도권 방문 가능 지역과 일정은 전화로 확인해주세요.</p>
+        </div>
       </div>
     </section>
   )
