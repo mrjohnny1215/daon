@@ -104,6 +104,22 @@ function SectionHeading({ eyebrow, title, description }) {
   )
 }
 
+function WorkCaseLabel({ prefix, label, tone }) {
+  const exampleSuffix = ' (작업 예시)'
+  const isExample = label.endsWith(exampleSuffix)
+  const title = isExample ? label.slice(0, -exampleSuffix.length) : label
+  const toneClass = tone === 'before' ? 'bg-rose-50 text-rose-700' : 'bg-blue-50 text-blue-700'
+
+  return (
+    <span className={`flex min-h-11 items-center justify-center break-keep rounded-xl px-1.5 py-2 text-center text-[10px] font-black leading-tight sm:min-h-12 sm:text-sm ${toneClass}`}>
+      <span>
+        <span className="block">{prefix} · {title}</span>
+        {isExample && <span className="mt-0.5 block">(작업 예시)</span>}
+      </span>
+    </span>
+  )
+}
+
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
 
@@ -159,9 +175,9 @@ function Hero() {
       <div className="mx-auto w-full max-w-5xl overflow-hidden">
         <div className="overflow-hidden">
           <div className="hero-banner relative">
-            <h1 className="sr-only">다온설비 | 서울·수도권 24시간 배관케어</h1>
-            <PhoneLink className="block" aria-label="다온설비 전화 상담 010-9879-2508">
-              <img src="/img/daon-hero-portrait.png" alt="다온설비, 막힘부터 누수까지 전문가가 해결합니다. 정확한 진단, 빠른 출동, 합리적인 비용, 확실한 A/S. 변기, 싱크대, 하수구, 누수탐지, 간단수리. 24시 출장대기 010-9879-2508" width="1024" height="1792" fetchPriority="high" className="block h-auto w-full" />
+            <h1 className="sr-only">바른설비 | 서울·수도권 24시간 배관케어</h1>
+            <PhoneLink className="block" aria-label="바른설비 전화 상담 010-9879-2508">
+              <img src="/img/bareun-hero-v2.webp" alt="바른설비, 하수구·누수·배관 설비. 막힘부터 누수까지 전문가가 해결합니다. 정확한 진단, 빠른 출동, 합리적인 비용, 확실한 A/S. 변기, 싱크대, 하수구, 누수탐지, 간단수리. 24시 출장대기 010-9879-2508" width="1536" height="2752" fetchPriority="high" className="block h-auto w-full" />
             </PhoneLink>
           </div>
         </div>
@@ -278,8 +294,8 @@ function BeforeAfter() {
                 )}
               </div>
               <figcaption className="mb-1 grid grid-cols-2 gap-2 px-1.5 pb-1 pt-2 sm:mb-0 sm:gap-3 sm:px-2 sm:pb-2 sm:pt-3">
-                <span className="flex min-h-11 items-center justify-center break-keep rounded-xl bg-rose-50 px-1.5 py-2 text-center text-[10px] font-black leading-tight text-rose-700 sm:min-h-12 sm:text-sm">BEFORE · {item.beforeLabel}</span>
-                <span className="flex min-h-11 items-center justify-center break-keep rounded-xl bg-blue-50 px-1.5 py-2 text-center text-[10px] font-black leading-tight text-blue-700 sm:min-h-12 sm:text-sm">AFTER · {item.afterLabel}</span>
+                <WorkCaseLabel prefix="BEFORE" label={item.beforeLabel} tone="before" />
+                <WorkCaseLabel prefix="AFTER" label={item.afterLabel} tone="after" />
               </figcaption>
             </figure>
           ))}
