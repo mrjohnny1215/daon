@@ -27,12 +27,8 @@ function Auth({ onSession }) {
         if (error) throw new Error('계정 등록에 실패했습니다. 이메일과 비밀번호를 확인하거나 잠시 후 다시 시도해주세요.')
         setMessage('인증 메일을 확인해주세요. 이메일 인증을 마치면 이 화면에서 로그인할 수 있습니다. 사전 승인된 이메일만 통계에 접근할 수 있습니다.')
       } else {
-        // Keep Supabase's verified, allowlisted admin identity as the authorization boundary.
-        // The requested short username is an alias for the configured admin email.
-        const adminEmail = import.meta.env.VITE_ADMIN_LOGIN_EMAIL
-        if (username.trim() !== 'admin' || !adminEmail) throw new Error('관리자 아이디 또는 비밀번호를 확인해주세요.')
-        const { data, error } = await supabase.auth.signInWithPassword({ email: adminEmail, password })
-        if (error) throw new Error('이메일·비밀번호 또는 이메일 인증 상태를 확인해주세요.')
+        const { data, error } = await supabase.auth.signInWithPassword({ email: username.trim(), password })
+        if (error) throw new Error('관리자 이메일 또는 비밀번호를 확인해주세요.')
         onSession(data.session)
       }
     } catch (error) { setMessage(error.message) }
@@ -42,7 +38,7 @@ function Auth({ onSession }) {
     <a href="/" className="daon-admin-brand"><span><Droplets size={23} /></span>바른설비<span className="daon-admin-brand-tag">ADMIN</span></a>
     <div className="daon-admin-auth-icon"><LockKeyhole size={27} /></div><p className="daon-admin-eyebrow">PRIVATE WORKSPACE</p>
     <h1>{mode === 'login' ? '관리자 로그인' : '관리자 계정 등록'}</h1><p className="daon-admin-subtitle">전화 문의로 이어지는 흐름을 한눈에 확인하세요.</p>
-    <form onSubmit={submit} noValidate><label>{mode === 'login' ? '아이디' : '이메일'}<input type={mode === 'login' ? 'text' : 'email'} autoComplete="username" value={username} onChange={e => setUsername(e.target.value)} placeholder={mode === 'login' ? '관리자 아이디' : '관리자 이메일'} required maxLength={254} /></label>
+    <form onSubmit={submit} noValidate><label>이메일<input type="email" autoComplete="username" value={username} onChange={e => setUsername(e.target.value)} placeholder="관리자 이메일" required maxLength={254} /></label>
     <label>비밀번호<input type="password" autoComplete={mode === 'login' ? 'current-password' : 'new-password'} value={password} onChange={e => setPassword(e.target.value)} minLength={mode === 'register' ? 12 : 1} placeholder={mode === 'register' ? '12자 이상 입력' : '비밀번호 입력'} required /></label>
     {message && <p className="daon-admin-message" role="status">{message}</p>}<button className="daon-admin-primary" disabled={busy || !supabase}>{busy ? '처리 중…' : mode === 'login' ? '대시보드 로그인' : '인증 메일 받기'}<ArrowLeft size={17} style={{ transform: 'rotate(180deg)' }} /></button></form>
     {mode === 'register' && <button type="button" className="daon-admin-text-button" onClick={() => { setMode('login'); setMessage('') }}>관리자 로그인으로 돌아가기</button>}

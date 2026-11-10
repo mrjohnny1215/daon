@@ -2,7 +2,7 @@
 
 - 운영 경로: https://daon-tau.vercel.app/admin (daon-sewer.vercel.app/admin에서도 동일)
 - 데이터베이스: Supabase 프로젝트 `daon-analytics` (`huumdhwjutsqwmkpuyqm`), 서울 리전
-- 빌드 설정: `VITE_SUPABASE_URL`, `VITE_SUPABASE_PUBLISHABLE_KEY`, `VITE_ADMIN_LOGIN_EMAIL`
+- 빌드 설정: `VITE_SUPABASE_URL`, `VITE_SUPABASE_PUBLISHABLE_KEY`
 - 프런트엔드에는 공개용 publishable key만 포함합니다. service role key는 사용하지 않습니다.
 
 ## 관리자 계정 연결
@@ -20,8 +20,8 @@ and email_confirmed_at is not null
 on conflict do nothing;
 ```
 
-`VITE_ADMIN_LOGIN_EMAIL`에는 관리자 아이디 `admin`에 연결할 기존 Supabase 관리자 이메일을 설정합니다. `/admin`에서는 아이디 `admin`과 그 Supabase 계정의 비밀번호로 로그인합니다. 인증·관리자 권한 검증은 계속 Supabase에서 처리하며, 비밀번호를 앱 코드나 Vercel 환경변수에 저장하지 않습니다.
-초기 운영 계정은 아래 절차로 등록합니다. 운영자는 이메일 계정 등록 → 이메일 인증 후 관리자 승인을 받은 다음, 아이디 `admin`으로 로그인합니다.
+`/admin`에서는 승인된 Supabase 관리자 이메일과 해당 계정 비밀번호로 로그인합니다. 이메일을 `VITE_` 환경변수에 넣지 않아 공개하지 않으며, 비밀번호를 앱 코드나 Vercel 환경변수에 저장하지 않습니다.
+초기 운영 계정은 아래 절차로 등록합니다. 운영자는 이메일 계정 등록 → 이메일 인증 후 관리자 승인을 받은 다음, 등록한 이메일로 로그인합니다.
 Supabase Authentication → URL Configuration의 Site URL을 `https://daon-tau.vercel.app/admin`으로 설정하고,
 Redirect URLs에 두 운영 도메인의 `/admin` 경로를 등록합니다.
 메일 인증을 마치면 관리자 화면으로 돌아와 로그인합니다. 초기 설정 전에는 승인된 계정이 없으므로 통계 접근은 차단됩니다.
