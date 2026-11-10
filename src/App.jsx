@@ -159,8 +159,10 @@ function Hero() {
       <div className="mx-auto w-full max-w-5xl overflow-hidden">
         <div className="overflow-hidden">
           <div className="hero-banner relative">
-            <h1 className="sr-only">바른설비 | 서울·수도권 24시간 배관케어</h1>
-            <img src="/img/bareun-hero.png" alt="바른설비 배관·설비 서비스 안내. 변기·싱크대·하수구 막힘, 누수 탐지와 간단 수리 상담. 24시간 전화 상담 010-9879-2508." width="937" height="1678" fetchPriority="high" className="block h-auto w-full" />
+            <h1 className="sr-only">다온설비 | 서울·수도권 24시간 배관케어</h1>
+            <PhoneLink className="block" aria-label="다온설비 전화 상담 010-9879-2508">
+              <img src="/img/daon-hero-portrait.png" alt="다온설비, 막힘부터 누수까지 전문가가 해결합니다. 정확한 진단, 빠른 출동, 합리적인 비용, 확실한 A/S. 변기, 싱크대, 하수구, 누수탐지, 간단수리. 24시 출장대기 010-9879-2508" width="1024" height="1792" fetchPriority="high" className="block h-auto w-full" />
+            </PhoneLink>
           </div>
         </div>
       </div>
